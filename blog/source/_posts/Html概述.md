@@ -17,7 +17,7 @@ HTML由一系列的元素所组成，这些元素可以用来封装不同部分�
 
 ![解析元素](grumpy-cat-small.png)
 
-1.解析HTML元素：
+<p id="hell_world_1">1.解析HTML元素：</p>
 
 	开始标签（The opening tag）：这里包含了元素的名称（本例为 p），被开、闭尖括号所包围。这表示元素从此开始或者开始起作用——在本例中即段落由此开始。
 
@@ -41,7 +41,7 @@ HTML由一系列的元素所组成，这些元素可以用来封装不同部分�
 
 	由引号所包围的属性值
 
-3.嵌套元素
+<p id="hell_world_2">3.嵌套元素</p>
 
 ``` html
 <p>My cat is <strong>very</strong>grumpy.</p>
@@ -49,7 +49,7 @@ HTML由一系列的元素所组成，这些元素可以用来封装不同部分�
 将一个元素置于其他元素之中——这被称作嵌套.
 ps:必须保证你的元素被正确地嵌套.
 
-4.空元素
+<p id="hell_world_3">4.空元素</p>
 
 ``` html
 <img src="images/firefox-icon.png" alt= "My test image">

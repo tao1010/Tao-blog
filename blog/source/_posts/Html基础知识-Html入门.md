@@ -6,7 +6,7 @@ tags: html
 
 [HTML入门](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Getting_started)
 
-1.[剖析一个HTML元素](https://tao1010.github.io/2018/03/05/Html概述/)
+1.[剖析一个HTML元素](https://tao1010.github.io/2018/03/05/Html概述/#hell_world_1)
 
 2.斜体强调标签
 
@@ -14,7 +14,7 @@ tags: html
 	<em>这是一个斜体</em>
 ```
 
-3.[嵌套元素](https://tao1010.github.io/2018/03/05/Html概述/)
+3.[嵌套元素](https://tao1010.github.io/2018/03/05/Html概述/#hell_world_2)
 
 4.块级元素和内联元素
 
@@ -44,7 +44,7 @@ eg:
 <em>first</em><em>second</em><em>third</em>
 ```
 
-5.[空元素](https://tao1010.github.io/2018/03/05/Html概述/)
+5.[空元素](https://tao1010.github.io/2018/03/05/Html概述/#hell_world_3)
 
 不是所有元素都拥有开始标签，内容和结束标记. 一些元素只有一个标签，通常用来在此元素所在位置插入/嵌入一些东西 。
 	
