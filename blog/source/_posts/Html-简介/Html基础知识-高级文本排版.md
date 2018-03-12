@@ -163,3 +163,5 @@ HTML 还支持将时间和日期标记为可供机器识别的格式的 &lt;time
 参考资料：
 
 1.[HTML高级文本排版](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Advanced_text_formatting)
+
+2.[Address](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/address)

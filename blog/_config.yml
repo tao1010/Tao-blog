@@ -82,6 +82,6 @@ deploy:
   repository: https://github.com/tao1010/tao1010.github.io.git
   branch: master
 
-# live2d:
-#   model: wanko
-#   bottom: -30
+live2d:
+  model: wanko
+  bottom: -30
