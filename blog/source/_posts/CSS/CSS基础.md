@@ -1,12 +1,14 @@
 ---
-title: css基础
+title: CSS基础
 date: 2018-03-06 13:47:56
-tags: css
+tags: CSS
 ---
 
 一、CSS(层叠样式表)简介
 
-css不是真正的编程语言，它是样式语言，允许你有选择地为HTML文档的元素添加样式。
+CSS不是真正的编程语言，它是样式语言，允许你有选择地为HTML文档的元素添加样式。
+
+HTML用于定义内容的结构和语义；CSS用于设计风格和布局（更改内容字体、颜色、大小、间距，将内容分为多列，添加动画，其他装饰效果）。
 
 
 二、CSS使用
@@ -143,7 +145,7 @@ img {
 
 1.[CSS基础](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web/CSS_basics)
 
-
+2.[CSS简介](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS)
 
 
 

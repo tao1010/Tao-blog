@@ -207,9 +207,16 @@ background-size: contain;
 
 [CSS是比HTML更好的响应式设计工具](https://cloudfour.com/thinks/responsive-images-101-part-8-css-images/)
 
-1.创建自适应图片
+0.为什么要用自适应图片
 
-分辨率切换：不同尺寸
+	艺术方向问题
+	分辨率切换问题
+
+最近应用的响应式图像技术，通过让浏览器提供多个图像文件来解决上述问题，比如使用相同显示效果的图片但包含多个不同的分辨率（分辨率切换），或者使用不同的图片以适应不同的空间分配（艺术方向）。
+
+创建自适应图片
+
+1.分辨率切换：不同尺寸
 
 标准的<img>元素传统上仅仅让你给浏览器指定唯一的资源文件：
 	
@@ -236,7 +243,9 @@ sizes定义了一组媒体条件（例如屏幕宽度）并且指明当某些媒
 	一个媒体条件（(max-width:480px)）——你会在 CSS topic中学到更多的。但是现在我们仅仅讨论的是媒体条件描述了屏幕可能处于的状态。在这里，我们说“当视窗的宽度是480像素或更少”。
 	一个空格
 	当媒体条件为真时，图像将填充的槽的宽度（440px）
-	
+
+	tips：对于槽的宽度，你也许会提供一个固定值 (px, em) 或者是一个相对值（比如百分比）你也许以及注意到最后一个槽的宽度是没有媒体条件的，它是默认的，当没有任何一个媒体条件为真时，它就会生效。 当浏览器成功匹配第一个媒体条件的时候，剩下所有的东西都会被忽略，所以要注意媒体条件的顺序。
+
 有了上述属性，浏览器会：	
 	
 	查看设备宽度
@@ -244,9 +253,66 @@ sizes定义了一组媒体条件（例如屏幕宽度）并且指明当某些媒
 	查看给予该媒体查询的槽大小
 	加载srcset列表中引用的最接近所选的槽大小的图像
 	
+老旧的浏览器不支持这些特性，会忽略这些特性，并继续正常加载src属性引用的图像文件。
+
+	tips:在HTML文件中的 <head> 标签里，你将会找到这一行代码 <meta name="viewport" content="width=device-width">: 这行代码会强制地让手机浏览器采用它们真实视图的宽度来加载网页（有些手机浏览器会提供不真实的视图宽度, 然后加载比浏览器真实视图的宽度大的宽度的网页，然后再缩小加载的页面，这样的做法对响应式图片或其他设计，没有任何帮助.
+
+2.艺术方向问题
+
+涉及要更改显示的图像以适应不同的图像显示尺寸。&lt;picture&gt;
+
+``` html
+<img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+
+```
+
+``` html
+<picture>
+	<source media="(max-width: 799px)" srcset="elva-480w-close-portrait.jpg">
+	<source media="(min-width: 800px)" srcset="elva-800w.jpg">
+	<img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
+</picture>
+
+```
+
+	<source>元素包含一个media属性，这个属性包含一个媒体条件（这个条件决定哪张图片会显示--第一个条件返回真，那么就会显示这张图）
+	srcset属性包含要显示图片的路径，请注意，正如我们在<img>上面看到的那样，<source>可以使用引用多个图像的srcset属性，还有sizes属性。所以你可以通过一个 <picture>元素提供多个图片，不过也可以给每个图片提供多分辨率的图片。
+	在任何情况下，你都必须在 </picture>之前正确提供一个<img>元素以及它的src和alt属性，否则不会有图片显示。当媒体条件都不返回真的时候（你可以在这个例子中删除第二个<source> 元素），它会提供图片；如果浏览器不支持 <picture>元素时，它可以作为后备方案。
 	
+tips:你应该仅仅当在艺术方向场景下使用media属性；当你使用media时，不要在sizes属性中也提供媒体条件。
 
+3.为什么不用CSS或JavaScript来做自适应图片
+	
+	当浏览器开始加载一个页面, 它会先下载 (预加载) 任意的图片，这是发生在主解析器开始加载和解析页面的 CSS 和 JavaScript 之前的。
+	平均来说，页面加载的时间少了 20%。但是, 这对响应式图片一点帮助都没有, 所以需要实现类似 srcset的方法。
+	因为你不能先加载好 <img> 元素后, 再用 JavaScript 检测视图的宽度，如果觉得大小不合适，就动态地加载小的图片替换已经加载好的图片，这样的话, 原始的图像已经被加载了, 然后你也加载了小的图像, 这样的做法对于响应式图像的理念来说，是很糟糕的。
 
+4.Webp和JPEG-2000
+
+``` html
+<picture>
+  <source type="image/svg+xml" srcset="pyramid.svg">
+  <source type="image/webp" srcset="pyramid.webp"> 
+  <img src="pyramid.png" alt="regular pyramid built from four equilateral triangles">
+</picture>
+```
+
+	不要使用media属性，除非你也需要艺术方向。
+	在<source> 元素中，你只可以引用在type中声明的文件类型。
+	像之前一样，如果必要，你可以在srcset和sizes中使用逗号分割的列表。
+5.小结
+
+艺术方向：当你想为不同布局提供不同剪裁的图片——比如在桌面布局上显示完整的、横向图片，而在手机布局上显示一张剪裁过的、突出重点的纵向图片，可以用 <picture> 元素来实现。
+
+分辨率切换：当你想要为窄屏提供更小的图片时，因为小屏幕不需要像桌面端显示那么大的图片；以及你想为高/低分辨率屏幕提供不同分辨率的图片时，都可以通过 vector graphics (SVG images)、 srcset 以及 sizes 属性来实现。
+
+6.一些有用的开发工具
+
+[开发者工具](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools)
+
+[响应设计视图](https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode)
+
+[DOM检查](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector)
 
 
 参考资料：
@@ -260,3 +326,5 @@ sizes定义了一组媒体条件（例如屏幕宽度）并且指明当某些媒
 4.[SVG参考元素](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Element)
 
 5.[响应式图片](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
+
+6.[img](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img)
