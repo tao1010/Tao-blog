@@ -32,7 +32,7 @@ CSS用于设计风格和布局（更改内容字体、颜色、大小、间距�
 
 二、CSS的使用
 
-![CSS解析](CSS解析.png)
+![CSS-parsing](CSS-parsing.png)
 
 1.CSS在HTML的引用方法
 在html文件中，head之中加入下列代码：
@@ -65,7 +65,7 @@ CSS用于设计风格和布局（更改内容字体、颜色、大小、间距�
 
 三、CSS工作原理
 
-![CSS工作原理](CSS工作原理.png)
+![CSS-work-principle](CSS-work-principle.png)
 
 当浏览器显示文档时，它必须将文档的内容与其样式信息结合。它分两个阶段处理文档：
 

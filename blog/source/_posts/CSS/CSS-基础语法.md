@@ -25,7 +25,7 @@ CSS 是一种声明式语言，这令其语法相当简单直观且易于理解�
 	
 2.声明
 
-![CSS声明](CSS声明.png)
+![CSS声明](CSS-statement.png)
 
 与值配对的属性被称为CSS声明。CSS声明会被放置在一个CSS声明块中。最后，CSS声明块与选择器相结合形成一个CSS规则集（或CSS规则）。
 
@@ -33,7 +33,7 @@ CSS 是一种声明式语言，这令其语法相当简单直观且易于理解�
 
 3.声明块
 
-![CSS声明块](CSS声明块.png)
+![CSS声明块](CSS-statement-block.png)
 
 声明被按块分组,每一组都用一对{}包裹，用{表示开始,用}表示结束;
 
@@ -46,7 +46,7 @@ CSS 是一种声明式语言，这令其语法相当简单直观且易于理解�
 
 通过在每个声明块前加上选择器（selector）来完成这一动作，选择器是一种模式，它能在页面上匹配一些元素。这将使相关的声明仅被应用到被选择的元素上。选择器加上声明块被称为规则集（ruleset），通常简称规则（rule）。
 
-![CSS选择器](CSS选择器.png)
+![CSS-selector](CSS-selector.png)
 
 [选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Selectors)可以很复杂 —— 你可以制作一个匹配多种元素的规则，这是通过把多个选择器囊括成用逗号分隔的选择器（一组,）来达成；选择器还可以被“链”在一起，例如我要选择所有 class 是 "blah" 的元素, 但是当且仅当它在 <article> 元素里、并且仅当鼠标指针悬停在这个元素上的时候。
 

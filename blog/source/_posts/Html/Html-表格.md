@@ -191,7 +191,7 @@ tags:	html
 	
 	 <tbody> 需要嵌套在 table 元素中，放置在 <thead>的下面或者是 <tfoot> 的下面，这取决于你如何设计你的结构。(<tfoot>放在<thead>下面也可以生效.)
 	
-![table结构](table结构.png)	
+![table结构](table-structure.png)	
 	
 	 <style>
         tbody {
@@ -292,7 +292,7 @@ tags:	html
 
 HTML有一种方法可以定义整列数据的样式信息：就是&lt;col&gt;和&lt;colgroup&gt;元素。 它们存在是因为如果你想让一列中的每个数据的样式都一样，那么你就要为每个数据都添加一个样式，这样的做法是令人厌烦和低效的。你通常需要在列中的每个&lt;td&gt;或&lt;th&gt;上定义样式，或者使用一个复杂的选择器，比如 :nth-child()。
 
-![共同样式](共同样式.png)
+![共同样式](common-style.png)
 
 方法一：不可取
 
@@ -348,7 +348,7 @@ tips:col中有多个属性样式时，用; 分号分开
 
 在一个表格中嵌套另外一个表格是可能的，只要你包含完整的结构，包括&lt;table&gt;元素。这样通常是不建议的，因为这种做法会使标记看上去很难理解，对使用屏幕阅读的用户来说，可访问性也降低了。
 
-![嵌套表格](嵌套表格.png)
+![嵌套表格](Nested-tables.png)
 
 	  <table id="table1">
 	        <caption>嵌套表格</caption>
