@@ -10,7 +10,7 @@ tags: html
 
 一个典型的网站可能会这样布局：
 
-![网站结构](网站结构.png)
+![网站结构](Web-site.png)
 
 1.标题: &lt;header&gt;
 

@@ -69,7 +69,7 @@ eg2:多个段落的内容为链接，你只需把该段内容放到&lt;a&gt;&lt;
 
 eg:目录结构
 
-![目录结构](目录结构.png)
+![目录结构](directory-structure.png)
 
 	此目录结构的根目录称为creation-hyperlinks。当在网站上工作时， 你会有一个包含整个网站的目录。
 	
