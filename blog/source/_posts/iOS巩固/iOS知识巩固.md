@@ -3,10 +3,13 @@ title: iOS知识巩固
 date: 2018-03-13 22:04:47
 tags: 面试
 ---
-
 1.协议protocol
 
+
+
 2.代理delegate
+
+
 
 3.类目catigory
 
