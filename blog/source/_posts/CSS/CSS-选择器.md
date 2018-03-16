@@ -187,30 +187,101 @@ eg:
 	[data-quantity^="optional"] {
 	  opacity: 0.5;
 	}	
-3.伪类
+	
+3.伪选择器：	
 
-	匹配处于确定状态的一个或多个元素，比如被鼠标指针悬停的元素，或当前被选中或未选中的复选框，或元素是DOM树中一父节点的第一个子节点。
-	
-	
-4.伪元素
-	
-	配处于相关的确定位置的一个或多个元素，例如每个段落的第一个字，或者某个元素之前生成的内容。
+定义:不选择实际元素，而是元素的某些部分，或仅在某些上下文中的元素。包含：伪类和伪元素两种。
 
-[伪元素](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Pseudo-classes_and_pseudo-elements)
+3.1.伪类(Pseudo-class)
+
+运用：一个以冒号(:)作为前缀的关键字，当你希望样式在特定状态下才被呈现到指定的元素时，你可以往元素的选择器后面加上对应的伪类（pseudo-class）。你可能希望某个（多个元素）元素在处于某种状态下呈现另一种样式，例如当鼠标悬停在元素上面时，或者当一个 checkbox 被禁用或被勾选时，又或者当一个元素是它在 DOM 树中父元素的第一个子元素时。
+
+	HTML:
+	<a href="https://developer.mozilla.org/" target="_blank">Mozilla Developer Network</a>
 	
+	CSS:
+	/* These styles will style our link in all states */
+	a {
+	  color: blue;
+	  font-weight: bold;
+	}
 	
-	 
-5.组合器
+	/* We want visited links to be the same color as non visited links */
+	a:visited {
+	  color: blue;
+	}
+	
+	/* We highlight the link when it is hovered (mouse), activated or focused (keyboard) */
+	a:hover,
+	a:active,
+	a:focus {
+	  color: darkred;
+	  text-decoration: none;
+	}
+[:hover鼠标悬停](https://developer.mozilla.org/zh-CN/docs/Web/CSS/:hover)	
+[更多的伪类用法](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Pseudo-classes_and_pseudo-elements)		
+3.2.伪元素
+
+用法：伪元素前缀是两个冒号 (::) —— 同样是添加到选择器后面达到指定某个元素的某个部分。配处于相关的确定位置的一个或多个元素，例如每个段落的第一个字，或者某个元素之前生成的内容。
+
+	<ul>
+		  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS">CSS</a> defined in the MDN glossary.</li>
+		  <li><a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML">HTML</a> defined in the MDN glossary.</li>
+	</ul>
+
+	
+	CSS
+	/* All elements with an attribute "href", which values start with "http", will be added an arrow after its content (to indicate it's an external link) */
+	[href^=http]::after {
+	  content: '⤴';
+	}
+[::first-letter第一行第一个字](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::first-letter)
+	
+[::first-line第一行](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::first-line)	
+	
+[更多伪元素](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Pseudo-classes_and_pseudo-elements)
+ 
+4.组合器
 	
 	这里不仅仅是选择器本身，还有以有效的方式组合两个或更多的选择器用于非常特定的选择的方法。例如，你可以只选择divs的直系子节点的段落，或者直接跟在headings后面的段落。
-	
-	
-	
-6.多用选取器
+A和B代表任何选择器：
+<table>
+	<tr>
+		<th>Combinators</th>
+		<th>Select</th>
+	</tr>
+	<tr>
+		<th>A,B</th>
+		<td>匹配满足A（和/或）B的任意元素（参见下方"同一规则集上的多个选择器"）.</td>
+	</tr>
+	<tr>
+		<th>A B</th>
+		<td>匹配任意元素，满足条件：B是A的直接子节点</td>
+	</tr>
+	<tr>
+		<th>A > B</th>
+		<td>匹配任意元素，满足条件：B是A的直接子节点</td>
+	</tr>
+	<tr>
+		<th>A + B</th>
+		<td>匹配任意元素，满足条件：B是A的下一个兄弟节点（AB有相同的父结点，并且B紧跟在A的后面）</td>
+	</tr>
+	<tr>
+		<th>A ~ B</th>
+		<td>匹配任意元素，满足条件：B是A之后的兄弟节点中的任意一个（AB有相同的父节点，B在A之后，但不一定是紧挨着A）</td>
+	</tr>
+</table>
+5.多个选取器
 
-	这些也不是单独的选择器；这个思路是将以逗号分隔开的多个选择器放在一个CSS规则下面， 以将一组声明应用于由这些选择器选择的所有元素。
+这些也不是单独的选择器；这个思路是将以逗号分隔开的多个选择器放在一个CSS规则下面， 以将一组声明应用于由这些选择器选择的所有元素。
 
+	p, li {
+		  font-size: 1.6em;
+	}
 
+	h1, h2, h3, h4, h5, h6 {
+		  font-family: helvetica, 'sans serif';
+	}
 
 
 
@@ -228,3 +299,5 @@ eg:
 5.[组合器和多用选择器](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Introduction_to_CSS/Combinators_and_multiple_selectors)
 
 6.[如何使用数据属性](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Using_data_attributes)
+
+7.[主要的选择器](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors)
