@@ -9,10 +9,12 @@ description:
 author: Tao
 language: zh-CN
 timezone:
+avatar: 
+# https://avatars2.githubusercontent.com/u/10276470?s=400&u=cd5bffdb638b108ce4c61baa72232c829a3ad08c&v=4
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://tao1010.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -72,8 +74,7 @@ pagination_dir: page
 # Extensions
 Plugins:  # https://hexo.io/plugins/ hexo-generate-feed
 ## Themes: https://hexo.io/themes/
-theme: yilia #next #landscape #cafe
-#landscape
+theme: yilia #next #landscape #cafe #yilia
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -85,3 +86,22 @@ deploy:
 live2d:
   model: wanko
   bottom: -30
+
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true
