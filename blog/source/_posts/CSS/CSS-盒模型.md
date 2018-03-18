@@ -38,7 +38,8 @@ reward: true
 	如果内容框变得比示例输出的窗口大，它将从窗口溢流，然后滚动条将会出现允许你滚动窗口来查看盒子剩余的内容 。你可以使用overflow属性来控制溢流——参看下边的 Overflow 章节。
 	框的高度不监视百分比的长度；框的高度总是采用框内容的高度，除非指定一个绝对的高度（如：px 或者em），它会比在页面上默认是100%高度更实用。
 	边界也忽略百分比宽度设置。
-	你应该注意的是框的总宽度是width, padding-right, padding-left, border-right, 以及 border-left 属性之和。在一些情况下比较恼人（例如，假使你想要一个框占窗口宽度的50%，但边界和内边距是用像素来表示时该怎么办？），为了避免这种问题，有可能使用属性box-sizing来调整框模型。使用值border-box，它将框模型更改成这个新的模型：
+	框的总宽度(属性之和) = width + padding-right + padding-left + border-right + border-left。
+	在一些情况下比较恼人（例如，假使你想要一个框占窗口宽度的50%，但边界和内边距是用像素来表示时该怎么办？），为了避免这种问题，有可能使用属性box-sizing来调整框模型。使用值border-box，它将框模型更改成这个新的模型：
 
 ![box-model-alt-small](box-model-alt-small.png)
 
@@ -137,6 +138,17 @@ eg:
 		
 <font color=red>tips:</font>使用 outline 属性的时候要注意，它一般只在需要可用性的一些情况才被使用，例如在一些用户点击它的时候使用 outline 来表示高亮、可用，如果你要使用 outline，请确保不要因为它看起来像链接的高亮让用户迷惑。
 
+	eg:
+	
+	HTML
+	<p>hell world</p>
+	 
+	 CSS
+	 /* 宽度 | 样式 | 颜色 */
+	 p{
+	 	outline: 1px solid red;
+	 } 
+
 四、CSS框类型
 
 所有对于框的应用都表示的是块级元素的，然而，CSS还有一些表现不同的其他框类型。框类型应用通过指定display属性，这个属性有很多的属性值，三个最普遍的类型：block, inline, and inline-block。
@@ -195,3 +207,5 @@ eg:
 2.[溢流](https://developer.mozilla.org/zh-CN/docs/Web/CSS/overflow)
 
 3.[背景裁剪](https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-clip)
+
+4.[Outline](https://developer.mozilla.org/zh-CN/docs/Web/CSS/outline)
