@@ -1,7 +1,9 @@
 ---
 title: iOS知识巩固
 date: 2018-03-13 22:04:47
-tags: 面试
+tags: iOS
+category: iOS
+
 ---
 
 
