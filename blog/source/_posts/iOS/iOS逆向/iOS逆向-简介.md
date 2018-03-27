@@ -1,8 +1,8 @@
 ---
 title: iOS逆向-简介
 date: 2018-03-18 16:42:02
-tags: [iOS逆向,iOS,OC]
-category: iOS
+tags: iOS逆向
+categories: iOS
 
 ---
 
