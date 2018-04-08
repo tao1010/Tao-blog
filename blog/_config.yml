@@ -107,10 +107,10 @@ jsonContent:
     raw: false
     content: false
     slug: false
-    updated: false
+    updated: true
     comments: false
     link: false
     permalink: false
     excerpt: false
-    categories: false
+    categories: true
     tags: true
