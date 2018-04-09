@@ -2,8 +2,7 @@
 title: Hexo+Github搭建自己的博客
 date: 2018-03-02 11:32:25
 tags: hexo
-categories: hexo
-updated: 2018-04-08 17:30:20
+categories: 博客
 toc: true
 
 ---
@@ -157,6 +156,17 @@ eg:https://github.com/jangdelong/hexo-theme-xups.git
 6.终端：
 	
 	hexo s --watch
+7.添加背景音乐
+
+步骤：
+	
+	a.打开网易云音乐网页版http://music.163.com/；	b.搜索歌曲,选择歌曲双击进入，点击生成外链播放器，拷贝HTML代码；
+	c.打开主题路径如下:layout-->_partial-->left-col.ejs;
+	d.将b拷贝内容粘贴到</nav>上面；
+	e.改变播放器尺寸 width=260 height=86
+	
+	
+	
 
 六、域名解析
 
@@ -189,4 +199,6 @@ ps:
 
 1.[博客系统创建菜单](https://blog.csdn.net/chwshuang/article/details/52350518)   
 2.[hexo统计插件](http://tengj.top/2016/03/17/hexo7count/)   
-3.[Hexo+yilia主题实现文章目录和添加视频](https://blog.csdn.net/u013082989/article/details/70212008)
+3.[Hexo+yilia主题实现文章目录和添加视频](https://blog.csdn.net/u013082989/article/details/70212008)  
+4.[Hexo-yilia主题修改](http://lawlite.me/2017/04/17/Hexo-yilia主题实现文章目录和添加视频/)  
+5.[yilia主题添加背景音乐](https://www.jianshu.com/p/9a3fc2bdfac7)

@@ -2,6 +2,8 @@
 title: Hexo在GitHub上的异常处理
 date: 2018-03-23 15:45:18
 tags: hexo
+categories: 博客
+
 ---
 
 一、意外的标记异常

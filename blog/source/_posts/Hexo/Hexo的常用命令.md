@@ -2,7 +2,7 @@
 title: hexo的常用命令
 date: 2018-03-05 14:49:28
 tags: hexo
-
+categories: 博客
 ---
 
 1.建站
