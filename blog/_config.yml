@@ -92,25 +92,25 @@ deploy:
   repository: https://github.com/tao1010/tao1010.github.io.git
   branch: master
 
-live2d:
-  model: wanko
-  bottom: -30
+# live2d:
+#   model: wanko
+#   bottom: -30
 
-jsonContent:
-  meta: false
-  pages: false
-  posts:
-    title: true
-    date: true
-    path: true
-    text: false
-    raw: false
-    content: false
-    slug: false
-    updated: true
-    comments: false
-    link: false
-    permalink: false
-    excerpt: false
-    categories: true
-    tags: true
+# jsonContent:
+#   meta: false
+#   pages: false
+#   posts:
+#     title: true
+#     date: true
+#     path: true
+#     text: false
+#     raw: false
+#     content: false
+#     slug: false
+#     updated: true
+#     comments: false
+#     link: false
+#     permalink: false
+#     excerpt: false
+#     categories: true
+#     tags: true

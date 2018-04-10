@@ -2,6 +2,8 @@
 title: CSS-CSS布局
 date: 2018-03-27 13:58:51
 tags: CSS
+categories: Web
+
 ---
 一、CSS布局回顾
 
@@ -224,14 +226,247 @@ CSS解析:
 
 6.网格布局
 
-二、浮动
+二、浮动  
+float属性最初指用于在成块的文本内浮动图像，现在已成为网页上创建多列布局的最常用工具之一。
 
+1.简单实例 - 图片浮动
 
+``` html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css-floats.css">
+</head>
+<body>
+  
+  <view>
+    <h1>Simple float example</h1>
 
+    <img src="https://mdn.mozillademos.org/files/13340/butterfly.jpg" alt="A pretty butterfly with red, white, and brown coloring, sitting on a large leaf">
 
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at ultricies tellus laoreet sit amet. Sed auctor cursus massa at porta. Integer ligula ipsum, tristique sit amet orci vel, viverra egestas ligula. Curabitur vehicula tellus neque, ac ornare ex malesuada et. In vitae convallis lacus. Aliquam erat volutpat. Suspendisse ac imperdiet turpis. Aenean finibus sollicitudin eros pharetra congue. Duis ornare egestas augue ut luctus. Proin blandit quam nec lacus varius commodo et a urna. Ut id ornare felis, eget fermentum sapien.</p>
 
+    <p>Nam vulputate diam nec tempor bibendum. Donec luctus augue eget malesuada ultrices. Phasellus turpis est, posuere sit amet dapibus ut, facilisis sed est. Nam id risus quis ante semper consectetur eget aliquam lorem. Vivamus tristique elit dolor, sed pretium metus suscipit vel. Mauris ultricies lectus sed lobortis finibus. Vivamus eu urna eget velit cursus viverra quis vestibulum sem. Aliquam tincidunt eget purus in interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
 
+  </view>
+
+  <script src="css-floats.js"></script>
+</body>
+</html>
+```	
+```css
+body{
+
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+p{
+    line-height: 2;
+    word-spacing: 0.1rem;
+}
+img{
+
+    float: left;
+    margin-right: 30px;
+
+    /* float: right;
+    margin-left: 30px; */
+
+    /* float: center;
+    margin-right: 30px; */
+    /* margin-left: 30px; */
+}
+```
+![浮动图片居左](float-left.png)   
+解析:
+
+	浮动元素img脱离正常的文档布局中,吸附到父容器view的左侧，在正常布局中位于该浮动元素之下的内容，会围绕着浮动元素，填满其右侧；
+	浮动的内容任然遵循盒子模型（外边距、边界），设置外边距就能阻止右侧的文字紧贴图片；
+2.简单实例 - 首字下沉
+
+```html
+<view>
+
+    <p>This is my very important paragraph.
+      I am a distinguished gentleman of such renown that my paragraph
+      needs to be styled in a manner befitting my majesty. Bow before
+     my splendour, dear students, and go forth and learn CSS!</p>
+  </view>
+```	
+
+```css
+/* 首字下沉 */
+p{
+    width: 400px;
+    margin: 0 auto;
+}
+p::first-line{
+
+    text-transform: uppercase;
+}
+p::first-letter{
+    font-size: 3em;
+    border: 1px solid black;
+    background: red;
+    float: left;
+    padding: 2px;
+    margin-right: 4px;
+}
+
+```
+![首字下沉](float-first-down.png)    
+3.多列浮动布局    
+两列布局
+
+```html
+<!-- 两列布局 -->
+  <view>
+
+    <h1>2 column layout example</h1>
+    <div> <!--采用div外部元素来包含内容，也可以用article,section,aside等 -->
+      <h2>First column</h2>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at ultricies tellus laoreet sit amet. Sed auctor cursus massa at porta. Integer ligula ipsum, tristique sit amet orci vel, viverra egestas ligula. Curabitur vehicula tellus neque, ac ornare ex malesuada et. In vitae convallis lacus. Aliquam erat volutpat. Suspendisse ac imperdiet turpis. Aenean finibus sollicitudin eros pharetra congue. Duis ornare egestas augue ut luctus. Proin blandit quam nec lacus varius commodo et a urna. Ut id ornare felis, eget fermentum sapien.</p>
+    </div>
+
+    <div>
+      <h2>Second column</h2>
+      <p>Nam vulputate diam nec tempor bibendum. Donec luctus augue eget malesuada ultrices. Phasellus turpis est, posuere sit amet dapibus ut, facilisis sed est. Nam id risus quis ante semper consectetur eget aliquam lorem. Vivamus tristique elit dolor, sed pretium metus suscipit vel. Mauris ultricies lectus sed lobortis finibus. Vivamus eu urna eget velit cursus viverra quis vestibulum sem. Aliquam tincidunt eget purus in interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+    </div>
+  </view>
+``` 
+```css
+/* 两列布局 */
+body{
+	在宽度达到900px之前，整个视图的宽度将达到90%，在超过900px后，它将保持在这个宽度，并在视口中居中。
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+div:nth-of-type(1){
+    width: 48%;
+    float: left;
+}
+div:nth-of-type(2){
+
+    width: 48%;
+    float: right;
+}
+```		
+![两列布局](float-two-col-layout.png)	   
+三列布局
+
+``` html
+  <view>
+
+    <h1>3 column layout example</h1>
+    <div> 
+      <h2>First column</h2>
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at ultricies tellus laoreet sit amet. Sed auctor cursus massa at porta. Integer ligula ipsum, tristique sit amet orci vel, viverra egestas ligula. Curabitur vehicula tellus neque, ac ornare ex malesuada et. In vitae convallis lacus. Aliquam erat volutpat. Suspendisse ac imperdiet turpis. Aenean finibus sollicitudin eros pharetra congue. Duis ornare egestas augue ut luctus. Proin blandit quam nec lacus varius commodo et a urna. Ut id ornare felis, eget fermentum sapien.</p>
+    </div>
+
+    <div>
+      <h2>Second column</h2>
+      <p>Nam vulputate diam nec tempor bibendum. Donec luctus augue eget malesuada ultrices. Phasellus turpis est, posuere sit amet dapibus ut, facilisis sed est. Nam id risus quis ante semper consectetur eget aliquam lorem. Vivamus tristique elit dolor, sed pretium metus suscipit vel. Mauris ultricies lectus sed lobortis finibus. Vivamus eu urna eget velit cursus viverra quis vestibulum sem. Aliquam tincidunt eget purus in interdum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+    </div>
+    <!-- 三列布局 -->
+    <div>
+      <h2>Third column</h2>
+      <p>Nam consequat scelerisque mattis. Duis pulvinar dapibus magna, eget congue purus mollis sit amet. Sed euismod lacus sit amet ex tempus, a semper felis ultrices. Maecenas a efficitur metus. Nullam tempus pharetra pharetra. Morbi in leo mauris. Nullam gravida ligula eros, lacinia sagittis lorem fermentum ut. Praesent dapibus eros vel mi pretium, nec convallis nibh blandit. Sed scelerisque justo ac ligula mollis laoreet. In mattis, risus et porta scelerisque, augue neque hendrerit orci, sit amet imperdiet risus neque vitae lectus. In tempus lectus a quam posuere vestibulum. Duis quis finibus mi. Nullam commodo mi in enim maximus fermentum. Mauris finibus at lorem vel sollicitudin.</p>
+    </div>
+
+  </view>
+```
+```css
+/* 三列布局 */
+body{
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+div:nth-of-type(1){
+    width: 36%;
+    float: left;
+}
+div:nth-of-type(2){
+
+    width: 20%;
+    float: left;
+    margin-left: 4%;
+}
+
+div:nth-of-type(3){
+
+    width: 26%;
+    float: right;
+}
+```
+![三列布局](float-three-col-layout.png)   
+4.清除浮动
+
+前文用了浮动，之后的内容想保留在指定位置比如：footer包含的元素内容显示在页脚底部
+
+```html
+<footer>
+        <p>&copy;2016 your imagination. This isn't really copyright, this is a mockery of the very concept. Use as you wish.</p>
+      </footer>
+```
+```css
+footer{
+	clear: both;
+}
+```
+解析:
+
+	将clear属性应用到元素上，是的这个元素和源码后面的将不浮动，除非将一个新的float声明到另外的元素上；
+	clear 可以取三个值：
+		left：停止任何活动的左浮动
+		right：停止任何活动的右浮动
+		both：停止任何活动的左右浮动
+
+5.浮动问题
+整个宽度可能难以计算    
+	
+	当加上样式框时(背景、外边距、内边距等),问题出现宽度难以计算，一行可能容不下三列；
+		解决方案：
+		*{
+			box-sizing: border-box;
+			
+		}
+		通过更改盒模型来拯救我们，盒子的宽度取值为 content + padding + border，而不仅是之前的content——所以当增加内边距或边界的宽度时，不会使盒子更宽——而是会使内容调整得更窄。
+	页脚压在最长列上：
+		footer {
+		  clear: both;
+		  margin-top: 4%;
+		}
+		此语法无效：
+			首先，他们在父元素中所占的面积的有效高度为0，用开发工具查看 <body> 的高度，正文高度只有 <h1> 的高度 。
+			这个可以通过很多方式解决，但是我们所依赖的是在父容器的底部清除浮动，如我们在我们的当前示例所做的那样。 如果检查当前示例中正文的高度，您应该看它的高度是行为本身。
+			其次，非浮动元素的外边距不能用于它们和浮动元素之间来创建空间；
+	解决这个！ 首先，在HTML的代码里添加新的<div> 元素，位于在<footer>标签的上方：
+		<div class="clearfix"></div>
+		
+		.clearfix {
+			  clear: both;
+		}
+	
+浮动项目的背景高度   
+	
+	多列布局的时候，列的高度可能不同，影响视觉效果，可以通过设置所有列的固定高度解决问题；
+		.colum{
+			height:550px;
+		}
+	将这些列的背景颜色设置为父元素的背景颜色，这样您就不会看到高度是不同的。这是目前最好的选择。
+	将它们设置为固定的高度，并使内容滚动overflow (参见我们溢流部分的示例。)
+	使用一种叫做伪列（faux columns）的技术——这包括将背景(和边界)从实际的列中提取出来，并在列的父元素上画一个伪造的背景，看起来像列的背景一样。不幸的是，这将无法处理列边界。
+清除浮动会变复杂   
+
+	当布局变得复杂，清理浮动也会复杂;
+	需要确保所有浮动尽快清除,避免给下方的内容再次麻烦;
+	没有方便的容器进行清理,必要时使用clearfix块。
 参考资料：   
 1.[布局回顾](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Introduction)   
 2.[布局](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout)   
 3.[浮动](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Floats)    
+4.[关于float](https://css-tricks.com/all-about-floats/)   

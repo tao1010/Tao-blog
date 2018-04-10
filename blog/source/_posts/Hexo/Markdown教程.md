@@ -2,7 +2,7 @@
 title: Markdown教程
 date: 2018-03-23 15:55:03
 tags: hexo
-categories: Markdown
+categories: 博客
 
 ---
 

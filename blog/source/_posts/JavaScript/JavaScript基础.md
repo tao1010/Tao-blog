@@ -2,6 +2,7 @@
 title: JavaScript基础
 date: 2018-03-07 09:19:02
 tags: JavaScript
+categories: Web
 ---
 
 

@@ -2,6 +2,7 @@
 title: HTML基础知识 - HTML入门
 date: 2018-03-08 09:17:47
 tags: html
+categories: Web
 ---
 
 [HTML入门](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/Getting_started)

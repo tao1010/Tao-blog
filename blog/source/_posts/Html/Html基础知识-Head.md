@@ -2,6 +2,7 @@
 title: Html基础知识-Head
 date: 2018-03-08 11:57:23
 tags: html
+categories: Web
 ---
 
 [Head中有什么？HTML中的元数据](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML/The_head_metadata_in_HTML)

@@ -2,7 +2,7 @@
 title: CSS-样式框-样式化表格
 date: 2018-03-21 14:11:10
 tags: CSS
-
+categories: Web
 ---
 
 举例代码:

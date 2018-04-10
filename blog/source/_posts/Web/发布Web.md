@@ -2,6 +2,7 @@
 title: 发布Web及工作原理
 date: 2018-03-07 14:39:00
 tags: web
+categories: Web
 ---
 
 一、发布网站的方法
