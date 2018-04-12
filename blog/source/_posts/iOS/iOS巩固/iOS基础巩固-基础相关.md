@@ -80,8 +80,30 @@ categories: iOS
  
 objectForKey: 和 valueForKey: 在多数情况下都是一样的结果返回，但是如果 key 是以 @ 开头，valueForKey: 就成了一个大坑（去掉 key 里的 @ 然后用剩下部分作为 key 执行 [super valueForKey:]。去掉@在原有的key无法找到对应的值而crash）
 
-建议在 NSDictionary 下只用 objectForKey: 来取值。
- 	
+建议在 NSDictionary 下只用 objectForKey: 来取值。	
+5.为一个类添加方法的方式有哪些？
+
+	1.定义该类方法；
+	2.重写该类；
+	3.继承该类；
+	4.动态添加方法；
+		 @interface EmptyClass:NSObject
+		 @end
+		 
+		 @implementation EmptyClass
+		 @end
+
+		 		
+		 { NSLog(@"Hello"); }
+		 
+		 - (void)addMethod
+		 {
+		     class_addMethod([EmptyClass class], @selector(sayHello2), (IMP)sayHello, "v@:");
+		     // Test Method
+		     EmptyClass *instance = [[EmptyClass alloc] init];
+		     [instance sayHello2];
+		     [instance release];
+		 }
  	
  	
  	
