@@ -211,8 +211,40 @@ eg:刷新某行代码
 	NSIndexPath *row_1=[NSIndexPath indexPathForRow:1 inSection:0];
 	NSArray *indexArray=[NSArray arrayWithObject:row_1];
 	[tableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationAutomatic];
-	
+五、tableview有footerView时，最后一个cell不显示分割线问题   
+OC:
 
+```	objectivec
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    for (UIView *subview in self.contentView.superview.subviews) {
+        if ([NSStringFromClass(subview.class) hasSuffix:@"SeparatorView"]) {
+            subview.hidden = NO;
+            CGRect frame = subview.frame;
+            frame.origin.x += self.separatorInset.left;
+            frame.size.width -= self.separatorInset.right;
+            subview.frame =frame;
+        }
+    }
+}
+```
+Swift:
+
+```swift
+override func layoutSubviews() {
+    super.layoutSubviews()
+    for item in self.contentView.superview!.subviews {
+        var subview = item as! UIView
+        if NSStringFromClass(subview.classForCoder).hasSuffix("SeparatorView") {
+            subview.hidden = false
+            var frame = subview.frame
+            frame.origin.x += self.separatorInset.left
+            frame.size.width -= self.separatorInset.right
+            subview.frame  = frame
+        }
+    }
+}
+```
 
 参考资料：
 
