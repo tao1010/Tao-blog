@@ -134,39 +134,148 @@ name = name + ' says hello!';
 
 ```js
 function checkGuess() {
+	
+	//用户输入的值   Number()-方法确保输入的是一个数字
   var userGuess = Number(guessField.value);
+  
   if (guessCount === 1) {
+    //玩家第一次猜数字：显示文本内容
     guesses.textContent = 'Previous guesses: ';
   }
-  guesses.textContent += userGuess + ' ';
  
+  guesses.textContent += userGuess + ' '; //字符串拼接
+ 
+ //猜测数字 =？随机数
   if (userGuess === randomNumber) {
+  
+  	//显示最终结果文本
     lastResult.textContent = 'Congratulations! You got it right!';
-    lastResult.style.backgroundColor = 'green';
-    lowOrHi.textContent = '';
-    setGameOver();
+    lastResult.style.backgroundColor = 'green';//设置颜色
+    lowOrHi.textContent = '';//清空提示信息
+    setGameOver();//调用结束方法
+    
   } else if (guessCount === 10) {
+  	//超过猜测次数，提示文本，调用结束方法
     lastResult.textContent = '!!!GAME OVER!!!';
     setGameOver();
+    
   } else {
+  	
+  	//猜测错误和猜测10次以内的情况
+  	//猜测状态提示，结果提示
     lastResult.textContent = 'Wrong!';
     lastResult.style.backgroundColor = 'red';
+
     if(userGuess < randomNumber) {
+
       lowOrHi.textContent = 'Last guess was too low!';
     } else if(userGuess > randomNumber) {
+
       lowOrHi.textContent = 'Last guess was too high!';
     }
   }
  
-  guessCount++;
-  guessField.value = '';
-  guessField.focus();
+ //为下一次猜测做准备
+  guessCount++;//次数+1
+  guessField.value = '';//文本清空
+  guessField.focus();//重置输入框焦点
 }
 ```
+8.事件(Events)		
+事件监听器:侦听事件发生的构造方法；		
+事件处理器:响应事件触发而运行的代码块；		
 
+```js
+//在checkGuess()函数的结束大括号后添加一下代码：
 
+guessSubmit.addEventListener('click', checkGuess);
+
+解析：
+	为guessSubmit按钮添加一个监听事件，这个方法包含两个可输入值（参数），监听事件的类型（在本例中为“点击”），和当事件发生时我们想要执行的代码（在本例中为checkGuess()函数）——注意，当函数作为事件监听方法的参数时，函数名后不应带括号。
+```
+9.完善游戏 - 处理后续逻辑		
+添加函数setGameOver():				
+
+```js
+function setGameOver(){
+	
+	//禁用表单文本输入和按钮，方法是将其disable属性设置为true
+    guessField.disabled = true;
+    guessSubmit.diableed = true;
+    
+    //创建了一个新的button元素，设置它的文本为“Start new game”,并把它添加到我们文档的底部
+    resetButton = document.createElement('button');
+    resetButton.textContent = 'Start new game';
+    document.body.appendChild(resetButton);
+    
+    //设置事件监听器，当它被点击时，一个名为resetGame()的函数被将被调用；
+    resetButton.addEventListener('click',resetGame);
+  }
+  
+function resetGame(){
+
+	//重置猜测次数
+    guessCount = 1;
+    
+    //清除信息段落
+    var resetParas = document.querySelectorAll('.resultParas p');
+    for(var i = 0; i < resetParas.length; i ++){
+
+        resetParas[i].textContent = '';
+    }
+    //删除重置按钮
+    resetButton.parentNode.removeChild(resetButton);
+    
+    //启动表单元素，清空文本，聚焦文本，
+    guessField.disabled = false;
+    guessSubmit.disabled = false;
+    guessField.value = '';
+    guessField.focus();
+	
+	//删除结果文本显示框的背景颜色
+    lastResult.style.backgroundColor = 'white';
+    //生成新的随机数
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+  }
+  
+```
+![game](game.png)		
+10.循环(Loops)
+
+```html
+  <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+    
+```
+```js
+//清除信息段落
+    var resetParas = document.querySelectorAll('.resultParas p');
+    for(var i = 0; i < resetParas.length; i ++){
+
+        resetParas[i].textContent = '';
+    }
+ 解析：
+ 	创建一个resetParas变量，包含一个列表中的所有段落，然后依次通过每个段落，删除每个段落的文本内容。	
+```
+11.一些系统函数			
+自动放置文本光标在输入框内:
+	
+	guessField.focus();
+在JavaScript中,一切都是对象，对象是存储在单个分组中的相关功能的集合。可以创建自己的对象(暂不涉及)，浏览器包含的内置对象，允许你的操作：
+	
+	var guessField = document.querySelector('.guessField');
+	解析：
+		使用了document对象的querySelector()方法来获得此引用。querySelector()需要一个参数 — — 用该元素的 CSS 选择器选择您想要的引用的元素
+12.操作浏览器对象		
+
+在JavaScript中可修改Html的值;
+
+使用JavaScript在元素上动态设置新的CSS样式；
+
+	页面上的每个元素都有一个style属性，它本身包含一个对象，其属性包含应用于该元素的所有内联CSS样式。
 
 参考资料：			
-1.[JavaScript第一课](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/A_first_splash)		
-2.[]()		
-3.[]()		
+1.[JavaScript第一课](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/A_first_splash)	
