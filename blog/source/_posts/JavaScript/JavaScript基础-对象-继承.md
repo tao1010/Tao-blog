@@ -1,0 +1,161 @@
+---
+title: JavaScript基础-对象-继承
+date: 2018-04-18 14:57:34
+tags: JavaScript
+categories: Web
+---
+
+一、原型式继承		
+JavaScript继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 原型式继承 —— prototypal inheritance）     
+1.例子	
+
+```js
+function Person(first, last, age, gender, interests) {
+  this.name = {
+    first,
+    last
+  };
+  this.age = age;
+  this.gender = gender;
+  this.interests = interests;
+};
+//所以的方法都定义在构造器的原型上：
+Person.prototype.bio = function() {
+  alert('HI! How are you?');
+};
+Person.prototype.greeting = function() {
+  alert('Hi! I\'m ' + this.name.first + '.');
+};
+Person.prototype.farewell = function() {
+  alert(this.name.first + ' has left the building. Bye for now!');
+}
+
+```
+2.定义构造函数		
+创建一个Teacher类,继承与Person的所有成员:
+	
+	一个新的属性，subject - 教师教授的学科；
+	一个被更新的greeting()方法；
+有参数 - 构造函数继承:		
+创建Teacher()构造器:
+
+```js
+//创建继承与Person的Teacher类
+function Teacher(first,last,age,gender,interests,subject){
+
+    /*允许调用一个在这个文件里别处定义的函数。
+    第一个参数指明了在运行这个函数时想对“this”指定的值(可以重新指定您调用的函数里所有“this”指向的对象).
+    其他的变量指明了所有目标函数运行时接受的参数.
+    */
+    Person.call(this,first,last,age,gender,interests);
+    this.subject = subject;
+}
+```
+无参数 - 构造函数继承:
+
+```js
+function Brick(){
+	
+	this.width = 10;
+	this.height = 20;
+}
+//继承Brick()
+function BlueGlassBrick(){
+	
+	Brick.call(this);
+	this.opacity = 0.5;
+	this.color = 'blue';
+}
+```
+3.设置构造函数的原型和构造器引用		
+继承方法:		
+	
+```js
+Teacher.prototype = Object.create(Person.prototype);
+Teacher.prototype.constructor = Teacher;
+解析：
+	create()创建一个和Person.prototype一样的新的原型属性值（这个属性指向一个包括属性和方法的对象），然后将其作为Teacher.prototype的属性值。这意味着Teacher.prototype现在会继承Person.prototype的所有属性和方法.
+	生成Teacher()的方式决定了：Teacher()的prototype的constructor属性指向的是Person().所以修改constructor属性，改变其指向。
+```
+4.向构造器添加和重写新的函数		
+
+```js
+//新增方法：
+Teacher.prototype.sayHi = function(){
+
+    alert('Say Hi');
+}
+//重写方法：
+Teacher.prototype.greeting = function(){
+  var prefix;
+  if(this.gender === 'male' || this.gender === 'Male' || this.gender === 'm' || this.gender === 'M') {
+    prefix = 'Mr.';
+  } else if(this.gender === 'female' || this.gender === 'Female' || this.gender === 'f' || this.gender === 'F') {
+    prefix = 'Mrs.';
+  } else {
+    prefix = 'Mx.';
+  }
+  alert('Hello. My name is ' + prefix + ' ' + this.name.last + ', and I teach ' + this.subject + '.');
+}
+```
+tips:此继承方法并不是唯一的方法.	
+演示：	
+
+```js
+var teacher1 = new Teacher('Dave', 'Griffiths', 31, 'male', ['football', 'cookery'], 'mathematics');
+
+控制台输入:
+teacher1.name.first;
+teacher1.interests[0];
+teacher1.bio();
+teacher1.subject;
+teacher1.greeting();
+```
+练习：新增继承于Person()的Student类
+
+```js
+//创建继承Person的Student类
+function Student(first,last,age,gender,interests,hello){
+
+  Person.call(this,first,last,age,gender,interests);
+  this.hello = hello;
+}
+//继承方法：
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+//新增方法：
+Student.prototype.sayHi = function(){
+
+  alert('Hi,Gays!');
+}
+
+var student1 = new Student('Jim','Griffiths', 31, 'male', ['football', 'cookery']);
+```
+5.对象成员总结		
+
+	那些定义在构造器函数中的、用于给予对象实例的。
+		在代码中，它们是构造函数中使用this.x = x类型的行；
+		在内置的浏览器代码中，它们是可用于对象实例的成员（通常通过使用new关键字调用构造函数来创建，例如var myInstance = new myConstructor()）。
+	那些直接在构造函数上定义、仅在构造函数上可用的。
+		这些通常仅在内置的浏览器对象中可用，
+		并通过被直接链接到构造函数而不是实例来识别。 例如Object.keys()。
+	那些在构造函数原型上定义、由所有实例和对象类继承的。
+		这些包括在构造函数的原型属性上定义的任何成员，如myConstructor.prototype.x()。
+
+6.JS中使用继承的场景			
+
+	如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。
+	如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。过多的继承会在调试代码时给您带来无尽的混乱和痛苦.
+
+二、JSON的使用
+
+
+
+
+
+
+
+参考资料：	
+1.[对象](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects)		   
+2.[JS中的继承](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Inheritance) 	
+3.[JSON的使用](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/JSON)
