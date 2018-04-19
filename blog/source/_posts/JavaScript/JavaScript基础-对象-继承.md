@@ -147,7 +147,100 @@ var student1 = new Student('Jim','Griffiths', 31, 'male', ['football', 'cookery'
 	如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。
 	如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。过多的继承会在调试代码时给您带来无尽的混乱和痛苦.
 
-二、JSON的使用
+二、JSON的使用		
+JSON是一种按照JavaScript对象语法的数据格式，用于将结构化数据表示为JavaScript对象的标准格式，通常用于再网站上表示和传输数据.
+	
+	从服务器向客户端发送一些数据，用于网页的显示.
+	JSON可以作为一个对象或者字符串存在.
+1.JSON结构		
+
+```js
+对象树:
+{
+  "squadName" : "Super hero squad",
+  "homeTown" : "Metro City",
+  "formed" : 2016,
+  "secretBase" : "Super tower",
+  "active" : true,
+  "members" : [
+    {
+      "name" : "Molecule Man",
+      "age" : 29,
+      "secretIdentity" : "Dan Jukes",
+      "powers" : [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast"
+      ]
+    },
+    {
+      "name" : "Madame Uppercut",
+      "age" : 39,
+      "secretIdentity" : "Jane Wilson",
+      "powers" : [
+        "Million tonne punch",
+        "Damage resistance",
+        "Superhuman reflexes"
+      ]
+    },
+    {
+      "name" : "Eternal Flame",
+      "age" : 1000000,
+      "secretIdentity" : "Unknown",
+      "powers" : [
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional travel"
+      ]
+    }
+  ]
+}
+解析：将上述对象保存为superHeroes对象
+	访问对象内数据方法：. 或[]
+		superHeroes.hometown
+		superHeroes["active"]
+	访问对象中的对象：链式访问(通过属性名和数组索引)
+		superHeroes["members"][1]["powers"][2]
+```
+2.JSON数组		
+
+```js
+[
+  {
+    "name" : "Molecule Man",
+    "age" : 29,
+    "secretIdentity" : "Dan Jukes",
+    "powers" : [
+      "Radiation resistance",
+      "Turning tiny",
+      "Radiation blast"
+    ]
+  },
+  {
+    "name" : "Madame Uppercut",
+    "age" : 39,
+    "secretIdentity" : "Jane Wilson",
+    "powers" : [
+      "Million tonne punch",
+      "Damage resistance",
+      "Superhuman reflexes"
+    ]
+  }
+]
+解析:
+	通过数组索引访问数组元素eg:[0]["powers"][0]
+```
+3.其他		
+
+	JSON是一种纯数据格式，只包含属性，没有方法;
+	JSON要求两头的{}来使其合法；
+	JSON可以将任何标准合法的JSON数据格式化保存，不只是数组和对象；
+	再JSON中，只有字符串才能用作属性；
+
+
+
 
 
 
