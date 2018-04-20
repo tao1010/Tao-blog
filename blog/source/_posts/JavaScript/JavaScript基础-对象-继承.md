@@ -239,14 +239,104 @@ JSON是一种按照JavaScript对象语法的数据格式，用于将结构化数
 	JSON可以将任何标准合法的JSON数据格式化保存，不只是数组和对象；
 	再JSON中，只有字符串才能用作属性；
 
+4.完成例子:		
+![json-superheroes](json-superheroes.png)     
+加载json
+	
+```js
+//1.声明变量 - 保存URL
+var requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
 
+//2.创建HTTP请求
+var request = new XMLHttpRequest();
 
+//3.打开新的请求
+request.open('GET', requestURL);
 
+//4.设置XHR来访问JSON格式数据type,发送请求:
+requset.responseType = 'json';
+request.send();
 
+//5.处理服务器回调数据
+//onload函数只有在请求成功时触发，因此可以保证request.response是绝对可以访问的；
+request.onload = function(){
+	
+	//存储返回数据
+	var superHeroes = request.response;
+	//定位header
+	populateHeader(superHeroes);
+	//创建英雄信息卡
+		
+}
+```	
+定位header
+	
+```js
+//定位header
+function populateHeader(jsonObj) {
 
+  //创建变量 - h1
+  var myH1 = document.createElement('h1');
 
+  //写入json数据到Header
+  myH1.textContent = jsonObj['squadName'];
 
+  //添加到header对象中
+  header.appendChild(myH1);
 
+  var myPara = document.createElement('p');
+  myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+  header.appendChild(myPara);
+}
+```		
+//创建英雄信息卡
+
+```js
+//创建英雄信息卡片
+function showHeroes(jsonObj) {
+  var heroes = jsonObj['members'];
+      
+  for(i = 0; i < heroes.length; i++) {
+  
+  	//创建元素
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');
+    var myPara1 = document.createElement('p');
+    var myPara2 = document.createElement('p');
+    var myPara3 = document.createElement('p');
+    var myList = document.createElement('ul');
+
+    myH2.textContent = heroes[i].name;
+    myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+    myPara2.textContent = 'Age: ' + heroes[i].age;
+    myPara3.textContent = 'Superpowers:';
+        
+    var superPowers = heroes[i].powers;
+    for(j = 0; j < superPowers.length; j++) {
+      var listItem = document.createElement('li');
+      listItem.textContent = superPowers[j];
+      myList.appendChild(listItem);
+    }
+
+    myArticle.appendChild(myH2);
+    myArticle.appendChild(myPara1);
+    myArticle.appendChild(myPara2);
+    myArticle.appendChild(myPara3);
+    myArticle.appendChild(myList);
+
+    section.appendChild(myArticle);
+  }
+}
+```
+5.对象和文本间的转换		
+
+	parse(): 以文本字符串形式接受JSON对象作为参数，并返回相应的对象。
+	stringify(): 接收一个对象作为参数，返回一个对应的JSON字符串。
+
+	var myJSON = { "name" : "Chris", "age" : "38" };
+	myJSON
+	var myString = JSON.stringify(myJSON);
+	myString
 
 参考资料：	
 1.[对象](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects)		   
