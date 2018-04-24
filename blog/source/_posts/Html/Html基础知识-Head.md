@@ -1,5 +1,5 @@
 ---
-title: Html基础知识-Head
+title: HTML基础知识-Head
 date: 2018-03-08 11:57:23
 tags: html
 categories: Web
