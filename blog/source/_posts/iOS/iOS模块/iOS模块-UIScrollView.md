@@ -6,7 +6,47 @@ categories: iOS
 
 ---
 
-一、导航栏渐变方法   
+一、UIScrollView的基本知识		
+1.属性		
+
+```objectivec
+_scrollView.bounces = NO;//不需要弹回
+_scrollView.showsHorizontalScrollIndicator = NO;//不需要横向指示条
+_scrollView.showsVerticalScrollIndicator = NO;//不需要纵向指示条
+_scrollView.scrollEnabled = YES;//是否滚动
+_scrollView.pagingEnabled = YES;//按页滚动
+[_scrollView setContentOffset:CGPointMake(0, 0)];//不偏移
+_scrollView.contentSize = CGSizeMake(100,200);//容器大小
+```
+2.代理方法		
+
+```objectivec
+//手指离开屏幕后ScrollView还会继续滚动一段时间只到停止
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+   NSLog(@"结束滚动后缓冲滚动彻底结束时调用");
+}
+ 
+-(void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+  NSLog(@"结束滚动后开始缓冲滚动时调用");
+}
+ 
+-(void)scrollViewDidScroll:(UIScrollView*)scrollView{
+     //页面滚动时调用，设置当前页面的ID
+    NSLog(@"视图滚动中X轴坐标%f",scrollView.contentOffset.x);
+    NSLog(@"视图滚动中X轴坐标%f",scrollView.contentOffset.y);
+}
+ 
+-(void)scrollViewWillBeginDragging:(UIScrollView*)scrollView{
+    NSLog(@"滚动视图开始滚动，它只调用一次");
+}
+ 
+-(void)scrollViewDidEndDragging:(UIScrollView*)scrollView willDecelerate:(BOOL)decelerate{
+   NSLog(@"滚动视图结束滚动，它只调用一次");
+}
+
+```
+
+二、导航栏渐变方法   
 方法一：向上滑动或者向下滑动时，分别修改navigationBar的alpha值
 
 ```objectivec
@@ -77,7 +117,7 @@ categories: iOS
 ```
 方法三：自定义UINavigationControler类实现  
 
-二、导航栏头像自由缩放   
+三、导航栏头像自由缩放   
 
 ```objectivec
 @interface GDUserSettingController ()<UIScrollViewDelegate>
