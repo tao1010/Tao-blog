@@ -1,5 +1,5 @@
 ---
-title: HTML基础知识 - HTML入门
+title: HTML基础知识-HTML入门
 date: 2018-03-08 09:17:47
 tags: html
 categories: Web

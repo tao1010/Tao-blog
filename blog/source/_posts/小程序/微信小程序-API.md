@@ -1,6 +1,6 @@
 ---
 title: 微信小程序-API
-date: 2018-04-09 13:18:04
+date: 2018-05-04 13:18:04
 tags: 微信小程序
 categories: 小程序
 ---
@@ -13,11 +13,14 @@ categories: 小程序
 
 一、网络
 
-|API|说明|
-|---|---|
+|API|说明|兼容|
+|---|---|---|
+|发起请求|
 |[wx.request](https://developers.weixin.qq.com/miniprogram/dev/api/network-request.html)|发起网络请求|
+|上传、下载|
 |[wx.uploadFile](https://developers.weixin.qq.com/miniprogram/dev/api/network-file.html#wxuploadfileobject)|上传文件|
 |[wx.downloadFile](https://developers.weixin.qq.com/miniprogram/dev/api/network-file.html#wxdownloadfileobject)|下载文件|
+|WebSocket|
 |[wx.connectSocket](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxconnectsocketobject)|创建WebSocket连接|
 |[wx.onSocketOpen](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxonsocketopencallback)|监听WebSocket打开|
 |[wx.onSocketError](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxonsocketerrorcallback)|监听WebSocket错误|
@@ -25,19 +28,27 @@ categories: 小程序
 |[wx.onSocketMessage](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxonsocketmessagecallback)|接受WebSocket消息|
 |[wx.closeSocket](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxclosesocket)|关闭WebSocket连接|
 |[wx.onSocketClose](https://developers.weixin.qq.com/miniprogram/dev/api/network-socket.html#wxonsocketclosecallback)|监听WebSocket关闭|
-
+|[SocketTask](https://developers.weixin.qq.com/miniprogram/dev/api/socket-task.html)|发送数据、关闭连接、监听打开/关闭/错误/消息|
 二、媒体
 
-|API|说明|
-|---|---|
+|API|说明|兼容|
+|---|---|---|
+|图片|
 |[wx.chooseImage](https://developers.weixin.qq.com/miniprogram/dev/api/media-picture.html#wxchooseimageobject)|从相册选择图片或者拍照|
 |[wx.priviewImage](https://developers.weixin.qq.com/miniprogram/dev/api/media-picture.html#wxpreviewimageobject)|预览图片|
-|[wx.startRecord](https://developers.weixin.qq.com/miniprogram/dev/api/media-record.html#wxstartrecordobject)|开始录音|
+|[wx.getImageInfo](https://developers.weixin.qq.com/miniprogram/dev/api/media-picture.html#wxgetimageinfoobject)|获取图片信息|
+|[wx.saveImageToPhotoAlbum](https://developers.weixin.qq.com/miniprogram/dev/api/media-picture.html#wxsaveimagetophotosalbumobject)|保存图片到系统相册|基础库 1.2.0 开始支持，低版本需做兼容处理|
+|录音|
+|[wx.startRecord](https://developers.weixin.qq.com/miniprogram/dev/api/media-record.html#wxstartrecordobject)|开始录音|1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.getRecorderManager 接口|
 |[wx.stopRecord](https://developers.weixin.qq.com/miniprogram/dev/api/media-record.html#wxstoprecord)|结束录音|
-|[wx.playVoice](https://developers.weixin.qq.com/miniprogram/dev/api/media-voice.html#wxplayvoice)|播放语音|
+|录音管理|
+|[wx.getRecorderManager](https://developers.weixin.qq.com/miniprogram/dev/api/getRecorderManager.html)|获取 全局唯一 的录音管理器 recorderManager|基础库 1.6.0 开始支持，低版本需做兼容处理|
+|音频播放控制|
+|[wx.playVoice](https://developers.weixin.qq.com/miniprogram/dev/api/media-voice.html#wxplayvoice)|播放语音|1.6.0 版本开始，本接口不再维护。建议使用能力更强的 wx.createInnerAudioContext|
 |[wx.pauseVoice](https://developers.weixin.qq.com/miniprogram/dev/api/media-voice.html#wxpausevoice)|暂停播放语音|
 |[wx.stopVoice](https://developers.weixin.qq.com/miniprogram/dev/api/media-voice.html#wxstopvoice)|结束播放语音|
-|[wx.getBackgroudAudioPlayerState](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxgetbackgroundaudioplayerstateobject)|获取音乐播放状态|
+|音乐播放控制|
+|[wx.getBackgroudAudioPlayerState](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxgetbackgroundaudioplayerstateobject)|获取音乐播放状态|v1.2.0后，API不在维护，建议使用wx.getBackgroundAudioManager|
 |[wx.playBackgroundAudio](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxplaybackgroundaudioobject)|播放音乐|
 |[wx.pauseBackgroundAudio](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxpausebackgroundaudio)|暂停播放音乐|
 |[wx.seekBackgroundAudio](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxstopbackgroundaudio)|控制音乐播放进度|
@@ -45,13 +56,27 @@ categories: 小程序
 |[wx.onBackgroundAudioPlay](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxonbackgroundaudioplaycallback)|监听音乐开始播放|
 |[wx.onBackgroundAudioPause](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxonbackgroundaudiopausecallback)|监听音乐暂停|
 |[wx.onBackgroundAudioStop](https://developers.weixin.qq.com/miniprogram/dev/api/media-background-audio.html#wxonbackgroundaudiostopcallback)|监听音乐结束|
+|背景音频播放管理|
+|[wx.getBackgroundAudioManager](https://developers.weixin.qq.com/miniprogram/dev/api/getBackgroundAudioManager.html)|获取全局唯一的背景音频管理器 backgroundAudioManager|v1.2.0,低版本兼容处理|
+|音频组件控制|
+|[wx.createAudioContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-audio.html#wxcreateaudiocontextaudioid)|创建并返回 audio 上下文 audioContext 对象|v1.6.0后该API不在维护|
+|[wx.createInnerAudioContext](https://developers.weixin.qq.com/miniprogram/dev/api/createInnerAudioContext.html)|创建并返回内部 audio 上下文 innerAudioContext 对象 |基础库 1.6.0 开始支持，低版本需做兼容处理|
+|视频|
 |[wx.chooseVideo](https://developers.weixin.qq.com/miniprogram/dev/api/media-video.html)|从相册选择视频或拍摄|
-
+|[wx.saveVideoToPhotosAlbum](https://developers.weixin.qq.com/miniprogram/dev/api/media-video.html#wxsavevideotophotosalbumobject)|保存视频到系统相册|v1.2.0,低版本兼容处理|
+|视频组件控制|
+|[wx.createVideoContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-video.html#wxcreatevideocontextvideoid)|创建并返回 video 上下文 videoContext 对象||
+|相机组件控制|
+|[wx.createCameraContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-camera.html)|创建并返回 camera 上下文 cameraContext 对象|v1.6.0,低版本兼容处理|
+|实时音视频|
+|[wx.createLivePlayerContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-live-player.html)|操作对应的 &lt;live-player/&gt; 组件|v1.7.0,低版本兼容处理|
+|[wx.createLivePusherContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-live-pusher.html)|创建并返回 live-pusher 上下文 LivePusherContext 对象|v1.7.0,低版本兼容处理|
 三、文件
 
-|API|说明|
-|---|---|
+|API|说明|兼容|
+|---|---|---|
 |[wx.saveFile](https://developers.weixin.qq.com/miniprogram/dev/api/file.html)|保存文件|
+|[wx.getFileInfo](https://developers.weixin.qq.com/miniprogram/dev/api/getFileInfo.html)|获取文件信息|基础库 1.4.0 开始支持，低版本需做兼容处理|
 |[wx.getSavedFileList](https://developers.weixin.qq.com/miniprogram/dev/api/file.html#wxgetsavedfilelistobject)|获取已保存文件列表|
 |[wx.getSavedFileInfo](https://developers.weixin.qq.com/miniprogram/dev/api/file.html#wxgetsavedfileinfoobject)|获取已保存文件信息|
 |[wx.removeSaveFile](https://developers.weixin.qq.com/miniprogram/dev/api/file.html#wxremovesavedfileobject)|删除已保存文件|
@@ -76,51 +101,170 @@ categories: 小程序
 
 |API|说明|
 |---|---|
+|获取位置|
 |[wx.getLocation](https://developers.weixin.qq.com/miniprogram/dev/api/location.html#wxgetlocationobject)|获取当前位置|
 |[wx.chooseLocation](https://developers.weixin.qq.com/miniprogram/dev/api/location.html#wxchooselocationobject)|打开地图选择位置|
+|查看位置|
 |[wx.openLocation](https://developers.weixin.qq.com/miniprogram/dev/api/location.html#wxopenlocationobject)|打开内置地图|
+|地图组件控制|
 |[wx.createMapContext](https://developers.weixin.qq.com/miniprogram/dev/api/api-map.html#wxcreatemapcontextmapid)|地图组件控制|
 
 六、设备
 
-|API|说明|
-|---|---|
+|API|说明|备注|
+|---|---|---|
+|系统信息|
+|[wx.getSystemInfo](https://developers.weixin.qq.com/miniprogram/dev/api/systeminfo.html#wxgetsysteminfoobject)|获取系统信息|异步|
+|[wx.getSystemInfoSync](https://developers.weixin.qq.com/miniprogram/dev/api/systeminfo.html#wxgetsysteminfosync)|获取系统信息|同步|
+|[wx.canIUse](https://developers.weixin.qq.com/miniprogram/dev/api/api-caniuse.html)|判断小程序的API，回调，参数，组件等是否在当前版本可用|此接口从基础库 1.1.1 版本开始支持|
+|网络状态|
 |[wx.getNetworkType](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxgetnetworktypeobject)|获取网络类型|
-|[wx.onNetworkStatusChange](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxonnetworkstatuschangecallback)|监听网络状态变化|
-|[wx.getSystemInfo](https://developers.weixin.qq.com/miniprogram/dev/api/systeminfo.html#wxgetsysteminfoobject)|获取系统信息 - 异步|
-|[wx.getSystemInfoSync](https://developers.weixin.qq.com/miniprogram/dev/api/systeminfo.html#wxgetsysteminfosync)|获取系统信息 - 同步|
+|[wx.onNetworkStatusChange](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxonnetworkstatuschangecallback)|监听网络状态变化|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|加速度计|
 |[wx.onAccelerometerChange](https://developers.weixin.qq.com/miniprogram/dev/api/accelerometer.html#wxonaccelerometerchangecallback)|监听加速度数据|
-|[wx.startAccelerometer](https://developers.weixin.qq.com/miniprogram/dev/api/accelerometer.html#wxstartaccelerometerobject)|开始加速度数据|
-|[wx.stopAccelerometer](https://developers.weixin.qq.com/miniprogram/dev/api/accelerometer.html#wxstopaccelerometerobject)|停止加速度数据|
+|[wx.startAccelerometer](https://developers.weixin.qq.com/miniprogram/dev/api/accelerometer.html#wxstartaccelerometerobject)|开始加速度数据|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|[wx.stopAccelerometer](https://developers.weixin.qq.com/miniprogram/dev/api/accelerometer.html#wxstopaccelerometerobject)|停止加速度数据|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|罗盘|
 |[wx.onCompassChange](https://developers.weixin.qq.com/miniprogram/dev/api/compass.html#wxoncompasschangecallback)|监听罗盘数据|
-|[wx.startCompass](https://developers.weixin.qq.com/miniprogram/dev/api/compass.html#wxstartcompassobject)|开启罗盘|
-|[wx.stopCompass](https://developers.weixin.qq.com/miniprogram/dev/api/compass.html#wxstopcompassobject)|停止罗盘|
-|[wx.setClipboardData](https://developers.weixin.qq.com/miniprogram/dev/api/clipboard.html#wxsetclipboarddataobject)|设置剪贴板内容|
-|[wx.getClipboardData](https://developers.weixin.qq.com/miniprogram/dev/api/clipboard.html#wxsetclipboarddataobject)|获取剪贴板内容|
+|[wx.startCompass](https://developers.weixin.qq.com/miniprogram/dev/api/compass.html#wxstartcompassobject)|开启罗盘|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|[wx.stopCompass](https://developers.weixin.qq.com/miniprogram/dev/api/compass.html#wxstopcompassobject)|停止罗盘|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|拨打电话|
 |[wx.makePhoneCall](https://developers.weixin.qq.com/miniprogram/dev/api/phonecall.html#wxmakephonecallobject)|拨打电话|
+|扫码|
 |[wx.scanCode](https://developers.weixin.qq.com/miniprogram/dev/api/scancode.html#wxscancodeobject)|扫码|
-
+|剪贴板|
+|[wx.setClipboardData](https://developers.weixin.qq.com/miniprogram/dev/api/clipboard.html#wxsetclipboarddataobject)|设置剪贴板内容|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|[wx.getClipboardData](https://developers.weixin.qq.com/miniprogram/dev/api/clipboard.html#wxsetclipboarddataobject)|获取剪贴板内容|基础库 1.1.0 开始支持，低版本需做兼容处理|
+|蓝牙|基础库版本 1.1.0 开始支持，低版本需做兼容处理|iOS 微信客户端 6.5.6 版本开始支持，Android 6.5.7 版本开始支持|
+|[wx.openBluetoothAdapter](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxopenbluetoothadapterobject)|初始化小程序蓝牙模块（生命周期：从open-close或小程序销毁）|
+|[wx.closeBluetoothAdapter](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxclosebluetoothadapterobject)|关闭蓝牙模块，使其进入未初始化状态|
+|[wx.getBluetoothAdapterState](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxgetbluetoothadapterstateobject)|获取本机蓝牙适配器状态||
+|[wx.onBluetoothAdapterStateChange](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxonbluetoothadapterstatechangecallback)|监听蓝牙适配器状态变化事件||
+|[wx.startBluetoothDevicesDiscovery](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxstartbluetoothdevicesdiscoveryobject)|开始搜寻附近的蓝牙外围设备||
+|[wx.stopBluetoothDevicesDiscovery](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxstopbluetoothdevicesdiscoveryobject)|停止搜寻附近的蓝牙外围设备||
+|[wx.getBluetoothDevices](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxgetbluetoothdevicesobject)|获取在小程序蓝牙模块生效期间所有已发现的蓝牙设备，包括已经和本机处于连接状态的设备||
+|[wx.getConnectedBluetoothDevices](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxgetconnectedbluetoothdevicesobject)|根据 uuid 获取处于已连接状态的设备||
+|[wx.onBluetoothDeviceFound](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxonbluetoothdevicefoundcallback)|监听寻找到新设备的事件||
+|[wx.createBLEConnection](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxcreatebleconnectionobject)|连接低功耗蓝牙设备||
+|[wx.closeBLEConnection](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxclosebleconnectionobject)|断开与低功耗蓝牙设备的连接||
+|[wx.getBLEDeviceServices](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxgetbledeviceservicesobject)|获取蓝牙设备所有 service（服务）||
+|[wx.getBLEDeviceCharacteristics](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxgetbledevicecharacteristicsobject)|获取蓝牙设备某个服务中的所有 characteristic（特征值）||
+|[wx.readBLECharacteristicValue](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxreadblecharacteristicvalueobject)|读取低功耗蓝牙设备的特征值的二进制数据值||
+|[wx.writeBLECharacteristicValue](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxwriteblecharacteristicvalueobject)|向低功耗蓝牙设备特征值中写入二进制数据||
+|[wx.notifyBLECharacteristicValueChange](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxnotifyblecharacteristicvaluechangeobject)|启用低功耗蓝牙设备特征值变化时的 notify 功能，订阅特征值||
+|[wx.onBLEConnectionStateChange](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxonbleconnectionstatechangecallback)|监听低功耗蓝牙连接状态的改变事件，包括开发者主动连接或断开连接，设备丢失，连接异常断开等等||
+|[wx.onBLECharacteristicValueChange](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#wxonblecharacteristicvaluechangecallback)|监听低功耗蓝牙设备的特征值变化。必须先启用notify接口才能接收到设备推送的notification||
+|[错误码](https://developers.weixin.qq.com/miniprogram/dev/api/bluetooth.html#%E8%93%9D%E7%89%99%E9%94%99%E8%AF%AF%E7%A0%81errcode%E5%88%97%E8%A1%A8)|蓝牙错误码列表||
+|iBeacon|
+|[wx.startBeaconDiscovery](https://developers.weixin.qq.com/miniprogram/dev/api/iBeacon.html#wxstartbeacondiscoveryobject)|开始搜索附近的iBeacon设备|基础库 1.2.0 开始支持，低版本需做兼容处理|
+|[wx.stopBeaconDiscovery](https://developers.weixin.qq.com/miniprogram/dev/api/iBeacon.html#wxstopbeacondiscoveryobject)|停止搜索附近的iBeacon设备||
+|[wx.getBeacons](https://developers.weixin.qq.com/miniprogram/dev/api/iBeacon.html#wxgetbeaconsobject)|获取所有已搜索到的iBeacon设备||
+|[wx.onBeaconUpdate](https://developers.weixin.qq.com/miniprogram/dev/api/iBeacon.html#wxonbeaconupdatecallback)|监听 iBeacon 设备的更新事件||
+|[wx.onBeaconServiceChange](https://developers.weixin.qq.com/miniprogram/dev/api/iBeacon.html#wxonbeaconservicechangecallback)|监听 iBeacon 服务的状态变化||
+|屏幕亮度|
+|[wx.setScreenBrightness](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxsetscreenbrightnessobject)|设置屏幕亮度|基础库 1.2.0 开始支持，低版本需做兼容处理|
+|[wx.getScreenBrightness](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxgetscreenbrightnessobject)|获取屏幕亮度||
+|[wx.setKeepScreenOn](https://developers.weixin.qq.com/miniprogram/dev/api/setKeepScreenOn.html)|设置是否保持常亮状态||
+|用户截屏事件|
+|[wx.onUserCaptureScreen](https://developers.weixin.qq.com/miniprogram/dev/api/onUserCaptureScreen.html)|监听用户主动截屏事件，用户使用系统截屏按键截屏时触发此事件||
+|振动|
+|[wx.vibrateLong](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxvibratelongobject)|使手机发生较长时间的振动（400ms）|基础库 1.2.0 开始支持，低版本需做兼容处理|
+|[wx.vibrateShort](https://developers.weixin.qq.com/miniprogram/dev/api/device.html#wxvibrateshortobject)|使手机发生较短时间的振动（15ms）||
+|手机联系人|
+|[wx.addPhoneContact](https://developers.weixin.qq.com/miniprogram/dev/api/phone-contact.html#wxaddphonecontactobject)|调用后，用户可以选择将该表单以“新增联系人”或“添加到已有联系人”的方式，写入手机系统通讯录，完成手机通讯录联系人和联系方式的增加||
+|NFC|
+|[wx.getHCEState](https://developers.weixin.qq.com/miniprogram/dev/api/nfc.html#wxgethcestateobject)|判断当前设备是否支持 HCE 能力|基础库 1.7.0 开始支持，低版本需做兼容处理|
+|[wx.startHCE](https://developers.weixin.qq.com/miniprogram/dev/api/nfc.html#wxstarthceobject)|初始化 NFC 模块||
+|[wx.stopHCE](https://developers.weixin.qq.com/miniprogram/dev/api/nfc.html#wxstophceobject)|关闭 NFC 模块。仅在安卓系统下有效||
+|[wx.onHCEMessag](https://developers.weixin.qq.com/miniprogram/dev/api/nfc.html#wxonhcemessagecallback)|监听 NFC 设备的消息回调，并在回调中处理||
+|[wx.sendHCEMessage](https://developers.weixin.qq.com/miniprogram/dev/api/nfc.html#wx.sendhcemessageobject)|发送 NFC 消息。仅在安卓系统下有效||
+|WiFi|
+|[wx.startWifi](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxstartwifiobject)|初始化 Wi-Fi 模块|基础库 1.6.0 开始支持，低版本需做兼容处理|
+|[wx.stopWifi](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxstopwifiobject)|关闭 Wi-Fi 模块||
+|[wx.connectWifi](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxconnectwifiobject)|连接 Wi-Fi。若已知 Wi-Fi 信息，可以直接利用该接口连接。|仅 Android 与 iOS 11 以上版本支持|
+|[wx.getWifiList](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxgetwifilistobject)|请求获取 Wi-Fi 列表，在 onGetWifiList 注册的回调中返回 wifiList 数据||
+|[wx.onGetWifiList](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxongetwifilistcallback)|监听在获取到 Wi-Fi 列表数据时的事件，在回调中将返回 wifiList||
+|[wx.setWifiList](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxsetwifilistobject)|iOS特有接口 在 onGetWifiList 回调后，利用接口设置 wifiList 中 AP 的相关信息||
+|[wx.onWifiConnected](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxonwificonnectedcallback)|监听连接上 Wi-Fi 的事件||
+|[wx.getConnectedWifi](https://developers.weixin.qq.com/miniprogram/dev/api/wifi.html#wxgetconnectedwifiobject)|获取已连接中的 Wi-Fi 信息||
 七、界面
 
-|API|说明|
-|---|---|
+|API|说明|备注|
+|---|---|---|
+|交互反馈|
 |[wx.showToast](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxshowtoastobject)|显示提示框|
 |[wx.showLoading](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxshowloadingobject)|显示加载提示框|
 |[wx.hideToast](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxhidetoast)|隐藏提示框|
 |[wx.hideLoading](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxhideloading)|隐藏加载提示框|
 |[wx.showModal](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxshowmodalobject)|显示模态弹窗|
 |[wx.showActionSheet](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html#wxshowactionsheetobject)|显示菜单列表|
+|设置导航条|
 |[wx.setNavigationBarTitle](https://developers.weixin.qq.com/miniprogram/dev/api/ui.html#wxsetnavigationbartitleobject)|设置当前页面标题|
 |[wx.showNavigationBarLoading](https://developers.weixin.qq.com/miniprogram/dev/api/ui.html#wxshownavigationbarloading)|显示导航条加载动画|
 |[wx.hideNavigationBarLoading](https://developers.weixin.qq.com/miniprogram/dev/api/ui.html#wxhidenavigationbarloading)|隐藏导航条加载动画|
+|[wx.setNavigationBarColor](https://developers.weixin.qq.com/miniprogram/dev/api/setNavigationBarColor.html)|设置导航条颜色|
+|设置tabBar|基础库 1.9.0 开始支持，低版本需做兼容处理|
+|[wx.setTabBarBadge](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxsettabbarbadgeobject)|为 tabBar 某一项的右上角添加文本||
+|[wx.removeTabBarBadge](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxremovetabbarbadgeobject)|移除 tabBar 某一项右上角的文本||
+|[wx.showTabBarRedDot](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxshowtabbarreddotobject)|显示 tabBar 某一项的右上角的红点||
+|[wx.hideTabBarRedDot](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxhidetabbarreddotobject)|隐藏 tabBar 某一项的右上角的红点||
+|[wx.setTabBarStyle](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxsettabbarstyleobject)|动态设置 tabBar 的整体样式||
+|[wx.setTabBarItem](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxsettabbaritemobject)|动态设置 tabBar 某一项的内容||
+|[wx.showTabBar](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxshowtabbarobject)|显示 tabBar||
+|[wx.hideTabBar](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html#wxhidetabbarobject)|隐藏 tabBar||
+|设置置顶信息|
+|[wx.setTopBarText](https://developers.weixin.qq.com/miniprogram/dev/api/ui.html#wxsettopbartextobject)|动态设置置顶栏文字内容，只有当前小程序被置顶时能生效，如果当前小程序没有被置顶，也能调用成功，但是不会立即生效，只有在用户将这个小程序置顶后才换上设置的文字内容|调用成功后，需间隔 5s 才能再次调用此接口，如果在 5s 内再次调用此接口，会回调 fail|
+|导航|
 |[wx.navigateTo](https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxnavigatetoobject)|新窗口打开页面|
 |[wx.redirectTo](https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxredirecttoobject)|原窗口打开页面|
 |[wx.switchTab](https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxswitchtabobject)|切换到tabbar页面|
 |[wx.navigateBack](https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxnavigateback)|退回上一个页面|
+|[wx.reLaunch](https://developers.weixin.qq.com/miniprogram/dev/api/ui-navigate.html#wxrelaunchobject)|关闭所有页面，打开到应用内的某个页面||
+|动画|
 |[wx.createAnimation](https://developers.weixin.qq.com/miniprogram/dev/api/api-animation.html)|动画|
+|位置|
+|[wx.pageScrollTo](https://developers.weixin.qq.com/miniprogram/dev/api/scroll.html)|将页面滚动到目标位置||
+|绘图|
+|[intro](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/intro.html)|在Canvas上画图||
+|[coordinates](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/coordinates.html)|Canvas坐标系||
+|[gradient](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/gradient.html)|渐变||
+|[Reference](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/reference.html)|API||
+|[color](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/color.html)|颜色的使用||
+|[wx.createCanvasContext](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-canvas-context.html)|创建 canvas 绘图上下文（指定 canvasId)||
 |[wx.createContext](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-canvas-context.html)|创建绘图上下文|
 |[wx.drawCanvas](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/draw-canvas.html)|绘图|
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|下拉刷新||基础库 1.5.0 开始支持，低版本需做兼容处理|
+|[Page.onPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#onpulldownrefresh)|在 Page 中定义 onPullDownRefresh 处理函数，监听该页面用户下拉刷新事件||
+|[wx.startPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#wxstartpulldownrefresh)|开始下拉刷新，调用后触发下拉刷新动画，效果与用户手动下拉刷新一致||
 |[wx.stopPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#wxstoppulldownrefresh)|停止下拉刷新动画|
+|WXML节点信息|
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|WXML节点布局相交状态|
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
+|[]()|||
 
 八、第三方平台
 
@@ -128,7 +272,6 @@ categories: 小程序
 |---|---|
 |[wx.getExtConfig]()|获取[第三方平台](https://developers.weixin.qq.com/miniprogram/dev/devtools/ext.html)自定义的数据字段|
 |[wx.getExtConfigSync]()||
-
 九、开放接口
 
 |API|说明|

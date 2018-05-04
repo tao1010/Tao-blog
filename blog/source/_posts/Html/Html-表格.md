@@ -415,8 +415,6 @@ tips:col中有多个属性样式时，用; 分号分开
 	2）为每个 <td> 元素添加一个 headers 属性。每个 headers 属性需要包含 th 元素的 id 。 如果这个单元格是属于一个 th 元素下的，那么就需要包含 th 元素的 id 的值，如果属于多个 th 元素，那么可以用空格分隔这些 id。
 	
 	
-参考资料：
-
-1.[HTML表格基础](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Tables/Basics)
-
+参考资料：       
+1.[HTML表格基础](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Tables/Basics)	 
 2.[Table表格结构](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Tables/Advanced)
