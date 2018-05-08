@@ -245,6 +245,17 @@ override func layoutSubviews() {
     }
 }
 ```
+六、TableViewCell优化			
+1.使用不透明视图(提高渲染速度)		
+
+	tableViewCell及子视图的opaque = YES（不透明属性，默认yes），alpha = 1；
+	不重复创建不必要的Cell，充分利用重用机制；
+		cell被重用时，内容不会不会自动清除，可以调用 setNeedDisplayRect: 或 setNeedsDisplay方法；
+	尽量减少子视图的数目，自定义除外；
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;//设置选中样式
+	不要做多余的绘制工作；
+	预渲染图像；
+	不要阻塞主线程；
 
 参考资料：
 

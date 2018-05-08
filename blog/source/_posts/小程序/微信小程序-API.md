@@ -233,60 +233,120 @@ categories: 小程序
 |[wx.createCanvasContext](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-canvas-context.html)|创建 canvas 绘图上下文（指定 canvasId)||
 |[wx.createContext](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-canvas-context.html)|创建绘图上下文|
 |[wx.drawCanvas](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/draw-canvas.html)|绘图|
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
+|[wx.canvasToTempFilePath](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/temp-file.html)|把当前画布指定区域的内容导出生成指定大小的图片，并返回文件路径||
+|[wx.canvasGetImageData](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/get-image-data.html)|返回一个数组，用来描述 canvas 区域隐含的像素数据||
+|[wx.canvasPutImageData](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/put-image-data.html)|将像素数据绘制到画布的方法||
+|[canvasContext.setFillStyle](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/set-fill-style.html)|设置填充色(默认black)||
+|[canvasContext.setStrokeStyle](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/set-stroke-style.html)|设置边框颜色(默认black)||
+|[canvasContext.setShadow](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/set-shadow.html)|设置阴影样式(offsetX 默认值为0， offsetY 默认值为0， blur 默认值为0，color 默认值为 black)||
+|[canvasContext.createLinearGradient](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-linear-gradient.html)|创建一个线性的渐变颜色(需要使用 addColorStop() 来指定渐变点，至少要两个)||
+|[canvasContext.createCircularGradient](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/create-circular-gradient.html)|创建一个圆形的渐变颜色(起点在圆心，终点在圆环, 需要使用 addColorStop() 来指定渐变点，至少要两个)||
+|[canvasContext.addColorStop](https://developers.weixin.qq.com/miniprogram/dev/api/canvas/add-color-stop.html)|创建一个颜色的渐变点||
+|...|...||
 |下拉刷新||基础库 1.5.0 开始支持，低版本需做兼容处理|
 |[Page.onPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#onpulldownrefresh)|在 Page 中定义 onPullDownRefresh 处理函数，监听该页面用户下拉刷新事件||
 |[wx.startPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#wxstartpulldownrefresh)|开始下拉刷新，调用后触发下拉刷新动画，效果与用户手动下拉刷新一致||
 |[wx.stopPullDownRefresh](https://developers.weixin.qq.com/miniprogram/dev/api/pulldown.html#wxstoppulldownrefresh)|停止下拉刷新动画|
 |WXML节点信息|
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
+|[wx.createSelectorQuery](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#wxcreateselectorquery)|返回一个SelectorQuery对象实例||
+|[selectorQuery.in](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryincomponent)|将选择器的选取范围更改为自定义组件component内||
+|[selectorQuery.select](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryselectselector)|返回一个NodesRef对象实例，可以用于获取节点信息||
+|[selectorQuery.selectAll](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryselectallselector)|在当前页面下选择匹配选择器selector的节点，返回一个NodesRef对象实例||
+|[selectorQuery.selectViewport](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryselectviewport)|选择显示区域，可用于获取显示区域的尺寸、滚动位置等信息，返回一个NodesRef对象实例||
+|[nodesRef.boundingClientRect](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryselectviewport)|添加节点的布局位置的查询请求，相对于显示区域，以像素为单位||
+|[nodesRef.scrollOffset](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#nodesrefscrolloffsetcallback)|添加节点的滚动位置查询请求，以像素为单位||
+|[nodesRef.fields](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#nodesreffieldsfieldscallback)|获取节点的相关信息，需要获取的字段在fields中指定||
+|[selectorQuery.exec](https://developers.weixin.qq.com/miniprogram/dev/api/wxml-nodes-info.html#selectorqueryexeccallback)|执行所有的请求，请求结果按请求次序构成数组，在callback的第一个参数中返回||
 |WXML节点布局相交状态|
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
-|[]()|||
+|[wx.createIntersectionObserver](https://developers.weixin.qq.com/miniprogram/dev/api/intersection-observer.html#intersectionobserverobservetargetselectorcallback)|创建并返回一个 IntersectionObserver 对象实例||
+|[intersectionObserver.relativeTo]()|使用选择器指定一个节点，作为参照区域之一||
+|[intersectionObserver.relativeToViewport]()|指定页面显示区域作为参照区域之一||
+|[intersectionObserver.observe]()|指定目标节点并开始监听相交状态变化情况||
+|[intersectionObserver.disconnect]()|停止监听。回调函数将不再触发||
 
 八、第三方平台
 
 |API|说明|
 |---|---|
 |[wx.getExtConfig]()|获取[第三方平台](https://developers.weixin.qq.com/miniprogram/dev/devtools/ext.html)自定义的数据字段|
-|[wx.getExtConfigSync]()||
+|[wx.getExtConfigSync](https://developers.weixin.qq.com/miniprogram/dev/api/ext-api.html#wxgetextconfigsync)|获取第三方平台自定义的数据字段的同步接口|
 九、开放接口
 
 |API|说明|
 |---|---|
+|登录||
 |[wx.login](https://developers.weixin.qq.com/miniprogram/dev/api/api-login.html)|登录|
+|[wx.checkSession](https://developers.weixin.qq.com/miniprogram/dev/api/signature.html#wxchecksessionobject)|校验用户当前session_key是否有效|
+|[签名加密](https://developers.weixin.qq.com/miniprogram/dev/api/signature.html)||
+|授权||
+|[wx.authorize](https://developers.weixin.qq.com/miniprogram/dev/api/authorize.html)|提前向用户发起授权请求|
+|用户信息||
 |[wx.getUserInfo](https://developers.weixin.qq.com/miniprogram/dev/api/open.html#wxgetuserinfoobject)|获取用户信息|
-|[wx.chooseAddress](https://developers.weixin.qq.com/miniprogram/dev/api/address.html#wxchooseaddressobject)|获取用户收货地址|
+|[getPhoneNumber](https://developers.weixin.qq.com/miniprogram/dev/api/getPhoneNumber.html)|获取微信用户绑定的手机号，需先调用login接口|
+|[UnionID机制说明](https://developers.weixin.qq.com/miniprogram/dev/api/unionID.html)||
+|微信支付||
 |[wx.requestPayment](https://developers.weixin.qq.com/miniprogram/dev/api/api-pay.html#wxrequestpaymentobject)|发起微信支付|
+|模板消息||
+|[使用说明](https://developers.weixin.qq.com/miniprogram/dev/api/notice.html#使用说明)|eg:购买成功通知，续费成功通知，预定成功通知，等模板|
+|[模版消息管理](https://developers.weixin.qq.com/miniprogram/dev/api/notice.html#模版消息管理)||
+|[发送模板消息](https://developers.weixin.qq.com/miniprogram/dev/api/notice.html#发送模板消息)||
+|客服消息||
+|[接受消息和事件](https://developers.weixin.qq.com/miniprogram/dev/api/custommsg/receive.html#接收消息和事件)||
+|[发送客服消息]()||
+|[转发消息]()||
+|[临时素材接口]()||
+|[客服输入状态]()||
+|[接入指引]()||
+|转发||
+|[Page.onShareAppMessage](https://developers.weixin.qq.com/miniprogram/dev/api/share.html#onshareappmessageoptions)|在 Page 中定义 onShareAppMessage 函数，设置该页面的转发信息|
+|[wx.showShareMenu]()|显示当前页面的转发按钮|
+|[wx.hideShareMenu]()|隐藏转发按钮|
+|[wx.updateShareMenu](https://developers.weixin.qq.com/miniprogram/dev/api/share.html#wxupdatesharemenuobject)|更新转发属性|
+|[wx.getShareInfo](https://developers.weixin.qq.com/miniprogram/dev/api/share.html#wxgetshareinfoobject)|获取转发详细信息|
+|[获取更多转发信息]()||
+|[页面内发起转发]()||
+|获取二维码||
+|[获取二维码](https://developers.weixin.qq.com/miniprogram/dev/api/qrcode.html)||
+|收货地址||
+|[wx.chooseAddress](https://developers.weixin.qq.com/miniprogram/dev/api/address.html#wxchooseaddressobject)|获取用户收货地址|
+|卡券||
 |[wx.addCard](https://developers.weixin.qq.com/miniprogram/dev/api/card.html#wxaddcardobject)|添加卡券|
 |[wx.openCard](https://developers.weixin.qq.com/miniprogram/dev/api/card.html#wxopencardobject)|打开卡券|
-
+|[会员卡组件](https://developers.weixin.qq.com/miniprogram/dev/api/card.html#会员卡组件)||
+|设置||
+|[wx.openSetting](https://developers.weixin.qq.com/miniprogram/dev/api/setting.html#wxopensettingobject)|调起客户端小程序设置界面，返回用户设置的操作结果|
+|[wx.getSetting](https://developers.weixin.qq.com/miniprogram/dev/api/setting.html#wxgetsettingobject)|获取用户的当前设置|
+|微信运动||
+|[wx.getWeRunData](https://developers.weixin.qq.com/miniprogram/dev/api/we-run.html#wxgetwerundataobject)|获取用户过去三十天微信运动步数，需要先调用 wx.login 接口|
+|打开小程序||
+|[wx.navigateToMiniProgram](https://developers.weixin.qq.com/miniprogram/dev/api/navigateToMiniProgram.html)|打开同一公众号下关联的另一个小程序|
+|[wx.navigateBackMiniProgram](https://developers.weixin.qq.com/miniprogram/dev/api/navigateBackMiniProgram.html)|返回到上一个小程序，只有在当前小程序是被其他小程序打开时可以调用成功|
+|打开APP||
+|[launchApp](https://developers.weixin.qq.com/miniprogram/dev/api/launchApp.html)|因为需要用户主动触发才能打开 APP，所以该功能不由 API 来调用|
+|获取发票抬头||
+|[wx.chooseInvoiceTitle](https://developers.weixin.qq.com/miniprogram/dev/api/chooseInvoiceTitle.html)|选择用户的发票抬头|
+|生物认证||
+|[wx.checkIsSupportSoterAuthentication](https://developers.weixin.qq.com/miniprogram/dev/api/checkIsSupportSoterAuthentication.html)|获取本机支持的 SOTER 生物认证方式|
+|[wx.startSoterAuthentication](https://developers.weixin.qq.com/miniprogram/dev/api/startSoterAuthentication.html)|开始 SOTER 生物认证|
+|[wx.checkIsSoterEnrolledInDevice](https://developers.weixin.qq.com/miniprogram/dev/api/checkIsSoterEnrolledInDevice.html)|获取设备内是否录入如指纹等生物信息的接口|
+|附近||
+|[添加地点](https://developers.weixin.qq.com/miniprogram/dev/api/nearby.html#添加地点)||
+|[查看地点列表](https://developers.weixin.qq.com/miniprogram/dev/api/nearby.html#查看地点列表)||
+|[删除地点](https://developers.weixin.qq.com/miniprogram/dev/api/nearby.html#删除地点)||
+|[展示/取消展示附近小程序](https://developers.weixin.qq.com/miniprogram/dev/api/nearby.html#展示取消展示附近小程序)||
+|插件管理||
+|[插件管理](https://developers.weixin.qq.com/miniprogram/dev/api/plugin.html)||
 十、数据
 
 |API|说明|
 |---|---|
+|常规分析||
+|[概括趋势](https://developers.weixin.qq.com/miniprogram/dev/api/analysis.html#概况趋势)||
+|[访问趋势](https://developers.weixin.qq.com/miniprogram/dev/api/analysis-visit.html#访问趋势)||
+|[访问分布](https://developers.weixin.qq.com/miniprogram/dev/api/analysis-visit.html#访问分布)||
+|[访问留存](https://developers.weixin.qq.com/miniprogram/dev/api/analysis-visit.html#访问留存)||
+|[访问页面](https://developers.weixin.qq.com/miniprogram/dev/api/analysis-visit.html#访问页面)||
+|自定义分析||
 |[wx.reportAnalytics](https://developers.weixin.qq.com/miniprogram/dev/api/analysis-report.html)|自定义分析数据上报接口|
 
 十一、更新
@@ -300,7 +360,6 @@ categories: 小程序
 |API|说明|
 |---|---|
 |[wx.createWorker](https://developers.weixin.qq.com/miniprogram/dev/api/createWorker.html)|多线程worker|
-
 
 十三、调试接口
 
