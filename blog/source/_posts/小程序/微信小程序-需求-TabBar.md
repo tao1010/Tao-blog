@@ -15,20 +15,61 @@ categories: 小程序
 
 	1.自定义TabBar模版；
 	2.app.json中不做“tabBar”的配置；
-	3.app.js中:
+	3.app.wxss中修改自定义模版样式：
+		.menu-item{  
+		  width: 24%;  
+		  float: left;  
+		  text-align: center;  
+		  padding-top: 8px;  
+		}  
+		.img{  
+		  width: 23px;  
+		  height: 23px;  
+		  display: block;  
+		  margin:auto;  
+		}  
+		.clear{  
+		  clear: both;  
+		}  
+		.tab-bar{  
+		
+		  width:100%;
+		  position: fixed;
+		  bottom:0;
+		  padding:10rpx;
+		  /* margin-left:-4rpx; */
+		  background:#F7F7FA;
+		  font-size:20rpx;
+		  color:#8A8A8A;
+		  /* box-shadow: 6rpx 6rpx 6rpx 6rpx #aaa; */
+		  height: 40px;
+		
+		
+		  /* position: fixed;  
+		  width: 100%;  
+		  padding: 0px 2%;  
+		  height: 50px;
+		  background: rgb(247, 247, 250);
+		  font-size: 20rpx; */
+		}
+	4.app.js中:
 		globalData:{
 			userInfo: null,
+			userRole: "-1",//1-家长 2-教师 3-管理员|学校
 			...
 			tabBarParent:{
-				"color": "#9e9e9e";
-				...
+				"color": "#9e9e9e",
+				"selectedColor": "#33cbd5",
+		      "postion": "bottom",
+      			"backgroundColor": "#fff",
+		      "borderStyle": "#ccc",
 				“list”: 
 				[{
 					"pagePath": "/pages/home/home",
           		"text": "学校",
           		"iconPath": "/pages/images/home.png",
           		"selectedIconPath": "/pages/images/home-sel.png",
-          		"selectedColor": "#4EDF80",
+          		"selectedColor": "#4EDF80",//配置选中字体颜色
 					"clas": "menu-item",
        	        active: false
                },
@@ -70,7 +111,7 @@ categories: 小程序
 	    if (_pagePath.indexOf('/') != 0) {
 	      _pagePath = '/' + _pagePath;
 	    }
-	    var tabBar = this.globalData.tabBar;
+	    var tabBar = this.globalData.tabBarParent;//获取家长Tabbar数组数据
 	    for (var i = 0; i < tabBar.list.length; i++) {
 	      tabBar.list[i].active = false;
 	      if (tabBar.list[i].pagePath == _pagePath) {
@@ -89,21 +130,64 @@ categories: 小程序
 	updateTabBarAdmin:funcation() {
 		...
 	}
-	5.在相关模块文件xx..wxml中导入模版：
+	5.设置入口角色
+	index.html
+	<view class="container">
+	    <view class='button' bindtap='clickParent'>家长中心</view>
+	    <view class='button' bindtap='clickTeacher'>教师中心</view>
+	    <view class='button' bindtap='clickAdmin'>管理中心</view>
+	</view>
+	
+	index.js
+	clickParent: function(){
+
+	    console.log("家长");
+	    getApp().globalData.userRole = "1"
+	    wx.redirectTo({
+	      url: '../parent/parent',
+	    })
+	  },
+	  clickTeacher: function(){
+	
+	    console.log("教师");
+	    getApp().globalData.userRole = "2"
+	    wx.redirectTo({
+	      url: '../teach/teach',
+	    })
+	  },
+	  clickAdmin: function(){
+	
+	    console.log("管理");
+	    getApp().globalData.userRole = "3"
+	    wx.redirectTo({
+	      url: '../admin/admin',
+	    })
+	  },
+		
+	6.在相关模块文件xx..wxml中导入模版：
 	eg:home.wxml
 	<import src="../template/template.wxml"/> <template is="tabBar" data="{{tabBar}}"/>
-	6.在相关模块文件xx.js中刷新tabBar：
+	7.在相关模块文件xx.js中刷新tabBar：
 	eg:home.js
+	const app = getApp()
 	Page({
 		
 		...
 		onLoad:function (option){
-			app.updateTabBarParent:funcation();
+			if (getApp().globalData.userRole === "1") {
+		      app.updateTabBarWithParent();
+		    }
+		    if (getApp().globalData.userRole === "2") {
+		      app.updateTabBarWithTeacher();
+		    }
+		    if (getApp().globalData.userRole === "3") {
+		      app.updateTabBarWithAdmin();
+		    }
 		}
 		...
 	})
 	
-2.定义变量，配置变量(系统方案，验证中)       
+2.定义变量，配置变量(      
 app.json配置
 
 	{
@@ -125,9 +209,7 @@ app.json配置
 	  ...
 	  }
 	}
-变量验证
 
-待完善
 
 
 
