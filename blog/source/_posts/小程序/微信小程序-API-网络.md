@@ -136,13 +136,222 @@ requestTask.abort() // 取消请求任务
 	
 	将本地资源上传到开发者服务器，客户端发起一个 HTTPS POST 请求；
 	其中 content-type 为 multipart/form-data；
+	上传文件返回一个uploadTask对象，该对象方法列表如下：
+		onProgressUpdate 监听上传进度变化（callback）
+			参数说明：
+				progress  上传进度百分比 Number
+				totalBytesSent 已上传的数据长度，单位Bytes Number
+				totalBytesExpectedTosend 预期需要上传的数据总长度 单位Bytes Number
+		abort 中断上传任务
 2.wx.downloadFile下载文件
 
 	下载文件资源到本地，客户端直接发起一个 HTTP GET 请求，返回文件的本地临时路径；
+	下载文件返回一个downloadTask对象，该对象方法列表如下：
+		onProgressUpdate 监听下载进度变化（callback）			参数说明：
+				progress  下载进度百分比 Number
+				totalBytesSent 已下载的数据长度，单位Bytes Number
+				totalBytesExpectedTosend 预期需要下载的数据总长度 单位Bytes Number
+		abort 中断下载任务
+3.object参数说明
 
+|参数|类型|必填|说明|
+|---|---|---|----|
+|uploadFile-上传||||
+|url|String|是|开发者服务器url|
+|filePath| String |是|要上传文件资源的路径|
+|name| String |是|文件对应的key，服务器端可以通过这个key获取文件二进制内容|
+|header|Object|否|HTTP请求Header，header中不能设置Referer|
+|formDataObject|否|HTTP请求中其他额外的form data|
+|success| Function |否|调用成功回调函数|
+|fail|Function|否|调用失败回调函数|
+|complte|Function|否|调用结束回调函数(不管成功、失败、都执行)|
+|downloadFile-下载文件||||
+url|String|是|下载资源的url|
+|header|Object|否|HTTP请求Header，header中不能设置Referer|
+|success| Function |否|下载成功后以 tempFilePath 的形式传给页面，res = {tempFilePath: '文件的临时路径'}|
+|fail|Function|否|调用失败回调函数|
+|complte|Function|否|调用结束回调函数(不管成功、失败、都执行)|
+
+4.success参数说明	
+
+|参数|类型|描述|
+|---|---|---|
+|uploadFile-上传文件|||
+|data|String|服务器返回的数据|
+|statusCode|Number|服务器返回的HTTP状态码|
+|downloadFile-下载文件|||
+| tempFilePath |String|临时文件路径，下载后的文件会存储到一个临时文件|
+|statusCode|Number|服务器返回的HTTP状态码|
+
+5.注意
+
+	文件的临时路径，在小程序本次启动期间可以正常使用，如需持久保存，需在主动调用 wx.saveFile，才能在小程序下次启动时访问得到。 
+	请在 header 中指定合理的 Content-Type 字段，以保证客户端正确处理文件类型
+	6.5.3 以及之前版本的 iOS 微信客户端 header 设置无效
+6.eg
+
+```js
+上传文件
+//上传文件
+uploadFile:function(){
+
+    const uploadTask =wx.uploadFile({
+      url: '',//上传服务器的URL
+      filePath: '',//文件路径
+      name: '',//文件名称
+      header: {},
+      formData: {
+        'user': 'test'
+      },
+      success: function(res) {
+
+        var data = res.data
+        //do something
+      },
+      fail: function(res) {
+        //do something
+      },
+      complete: function(res) {
+        //do something
+      },
+    })
+    //上传进度
+    uploadTask.onProgressUpdate((res) =>{
+
+      console.log('上传进度', res.progress)
+      console.log('已经上传的数据长度', res.totalBytesSent)
+      console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+    })
+    uploadTask.abort()//取消上传任务
+ },
+
+下载文件
+downloadFile: function(){
+	const downloadTask = wx.downloadFile({
+	    url: 'http://example.com/audio/123', //仅为示例，并非真实的资源
+	    success: function(res) {
+	        wx.playVoice({
+	            filePath: res.tempFilePath
+	        })
+	    }
+	})
+	
+	downloadTask.onProgressUpdate((res) => {
+	    console.log('下载进度', res.progress)
+	    console.log('已经下载的数据长度', res.totalBytesWritten)
+	    console.log('预期需要下载的数据总长度', res.totalBytesExpectedToWrite)
+	})
+	
+	downloadTask.abort() // 取消下载任务
+	
+	}
+```
 
 四、WebSocket
+1.wx.connectSocket - 创建WebSocket连接		
+	
+	返回SocketTask对象，WebSocket任务；
+	对象方法列表：
+		SocketTask.send(object) - 通过 WebSocket 连接发送数据。
+		SocketTask.close(object) - 关闭 WebSocket 连接
+		SocketTask.onOpen - 监听 WebSocket 连接打开事件
+		SocketTask.onClose - 监听 WebSocket 连接关闭事件
+		SocketTask.onError - 监听 WebSocket 错误
+		SocketTask.onMessage - 监听WebSocket接受到服务器的消息事件
+2.wx.onSocketOpen(CALLBACK) - 监听WebSocket连接打开事件
+	
+	callback回调函数 res header object 连接成功的HTTP响应Header
+3.wx.onSocketError(CALLBACK) - 监听WebSocket错误
 
+
+4.wx.sendSocketMessage(OBJECT) - 通过 WebSocket 连接发送数据
+
+	需要先wx.connectSocket，并在wx.onSocketOpen回调之后才能发送；
+object参数说明：	
+	
+|参数|类型|必填|描述|
+|---|---|---|---|
+|data|String/ArrayBuffer|是|需要发送的内容|
+|success| Function |否|调用成功回调函数|
+|fail| Function |否|调用失败回调函数|
+|complete|Function|否|调用结束回调函数(不管成功、失败、都执行)|
+5.wx.onSocketMessage(CALLBACK) - 监听WebSocket接受到服务器的消息事件
+
+6.wx.closeSocket(OBJECT) - 关闭 WebSocket 连接。
+
+|参数|类型|必填|描述|
+|---|---|---|---|
+|code|Number|否|一个数字值表示关闭连接的状态号，表示连接被关闭的原因。如果这个参数没有被指定，默认的取值是1000 （表示正常连接关闭）|
+|reason|String|否|一个可读的字符串，表示连接被关闭的原因。这个字符串必须是不长于123字节的UTF-8 文本（不是字符）|
+|success| Function |否|调用成功回调函数|
+|fail| Function |否|调用失败回调函数|
+|complete|Function|否|调用结束回调函数(不管成功、失败、都执行)|
+
+7.wx.onSocketClose(CALLBACK) - 监听WebSocket关闭	
+8.注意：
+	
+	v1.7.0-  小程序同时只能有一个WebSocket连接，如果当前已经存在一个WebSocket连接，会自动关闭该链接，并重新创建一个WebSocket连接;
+	v1.7.0+ 支持存在多个WebSocket连接，每次成功调用wx.connectSocket会返回一个新的SocketTask；
+	时序问题：如果 wx.connectSocket 还没回调 wx.onSocketOpen，而先调用 wx.closeSocket，那么就做不到关闭 WebSocket 的目的。
+	
+9.eg
+
+```objectivec
+//连接
+wx.connectSocket({
+  url: 'wss://example.qq.com',
+  data:{
+    x: '',
+    y: ''
+  },
+  header:{ 
+    'content-type': 'application/json'
+  },
+  protocols: ['protocol1'],
+  method:"GET"
+})
+
+//定义变量
+var socketOpen = false
+var socketMsgQueue = []
+
+//监听WebSocket连接打开事件
+wx.onSocketOpen(function(res) {
+  console.log('WebSocket连接已打开！')
+  
+  //发送消息
+  socketOpen = true
+  for (var i = 0; i < socketMsgQueue.length; i++){
+  	
+  	 if (socketOpen) {
+	    wx.sendSocketMessage({
+	      data:socketMsgQueue[i]
+	    })
+	  } else {
+	     socketMsgQueue.push(socketMsgQueue[i])
+	  }
+  }
+  socketMsgQueue = []
+  //必须在 WebSocket 打开期间调用 wx.closeSocket 才能关闭。
+  wx.closeSocket()
+})
+
+//监听WebSocket接受到服务器的消息事件
+wx.onSocketMessage(function(res) {
+  console.log('收到服务器内容：' + res.data)
+})
+
+//监听WebSocket错误
+wx.onSocketError(function(res){
+  console.log('WebSocket连接打开失败，请检查！')
+})
+
+//关闭Socket
+wx.onSocketClose(function(res) {
+  console.log('WebSocket 已关闭！')
+})
+
+```
 
 参考资料：		
 1.[网络API](https://developers.weixin.qq.com/miniprogram/dev/api/api-network.html)		
