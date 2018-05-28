@@ -56,7 +56,17 @@ categories: iOS
 	在iOS中，KVO或Notification可以实现此效果；
 2.MVVM第三方:[ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)		
 
+	函数式编程(Functional Programming)
+	响应式编程(React Programming)
+	无状态
+	不可修改
 3.MVVM作用
+	
+	实际使用中，能够使Model层和View层解藕；
+4.MVVM问题
+	
+	数据绑定使bug很难被调试；
+	对于过大项目，数据绑定需要花费更多的内存；
 
 
 
