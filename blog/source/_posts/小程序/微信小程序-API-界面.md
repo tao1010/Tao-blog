@@ -507,59 +507,247 @@ wx.pageScrollTo - 将页面滚动到目标位置
 七、绘图
 1.API		
 
-	createCanvasContext - 创建canvas绘画上下文(指定canvasId)
-	createContext - 创建canvas绘图上下文(不推荐使用)
-	drawCanvas - 进行绘图(不推荐使用)
-	canvasToTempFilePath - 导出图片
+	wx.createCanvasContext - 创建canvas绘画上下文(指定canvasId)
+		在自定义组件中，第二个参数传入组件实例this，以操作组件内<canvas/>组件；如果省略第二个参数，则不在任何自定义组件内查找；
+	wx.createContext - 创建canvas绘图上下文(不推荐使用)
+	wx.drawCanvas - 进行绘图(不推荐使用)
+		参数说明：
+		canvasId 画布标识，传入<canvas/>的canvas-id String
+		actions 绘图动作数组，由 wx.createContext 创建的 context，调用 getActions 方法导出绘图动作数组
+		reserve 本次绘制是否接着上一次绘制，即reserve参数为false，则在本次调用drawCanvas绘制之前native层应先清空画布再继续绘制；若reserver参数为true，则保留当前画布上的内容，本次调用drawCanvas绘制的内容覆盖在上面，默认 false
+		用所提供的actions在所给的canvas-id对应的canvas上进行绘图；
+	wx.canvasToTempFilePath - 导出图片
+		把当前画布指定区域的内容导出生成指定大小的图片，并返回文件路径。在自定义组件下，第二个参数传入组件实例this，以操作组件内 <canvas/> 组件
+		在 draw 回调里调用该方法才能保证图片导出成功；
+		object参数说明：
+			x  			画布x轴起点(默认0) Number
+			y  			画布y轴起点(默认0) Number
+			width 		画布宽度（默认为canvas宽度-x） Number
+			height 	画布高度（默认为canvas高度-y）Number
+			destWidth 输出图片宽度（默认为 width * 屏幕像素密度） Number
+			destHeight 输出图片高度（默认为 height * 屏幕像素密度）Number
+			canvasId   画布标识，传入 <canvas/> 的 canvas-id
+			fileType   目标文件的类型，只支持 'jpg' 或 'png'。默认为 'png'
+			quality 	 图片的质量，取值范围为 (0, 1]，不在范围内时当作1.0处理
+			success/fail/complete 回调函数
+	wx.canvasGetImageData - 返回一个数组，用来描述canvas区域隐含的像素数据
+	wx.canvasPutImageData - 将像素数据绘制到画布的方法
+			
 2.context对象的方法列表
 	
 	颜色、样式、阴影
-		setFillStyle - 设置填充样式
-		setStrokeStyle - 设置线条样式
-		setShadow - 设置阴影
+		setFillStyle - 设置填充颜色 默认black
+		setStrokeStyle - 设置边框颜色 默认black
+		setShadow - 设置阴影样式
+			 如果没有设置，offsetX 默认值为0， 设置阴影相对于形状在水平方向的偏移
+			 				offsetY 默认值为0， 设置阴影相对于形状在竖直方向的偏移
+			 				blur 默认值为0，设置阴影的模糊级别 0～100，数值越大越模糊
+			 				color 默认值为 black；设置阴影的颜色
 	渐变
 		createLinearGradient - 创建一个线性渐变
 		createCircularGradient - 创建一个圆形渐变 
-		addColorStop - 在渐变中的某一点添加一个颜色渐变
+		addColorStop - 在渐变中的某一点添加一个颜色渐变addColorStop(stop,color)
+			小于最小 stop 的部分会按最小 stop 的 color 来渲染，大于最大 stop 的部分会按最大 stop 的 color 来渲染；
 	线条样式
 		setLineWidth - 设置线条宽度
 		setLineCap - 设置线条端点样式
+			lineCap参数说明:'butt'、'round'、'square'
 		setLineJoin - 设置两线相交处的样式
-		setMiterLimit - 设置最大倾斜
+			lineJoin参数说明:'bevel'、'round'、'miter'
+		setLineDash - 设置虚线的线条宽度
+			参数说明：
+			pattern 一组描述交替绘制线段和间距长度的数字 Array
+			offset 虚线偏移量 Number
+			eg:setLineDash([实线长度, 虚线长度], 虚线偏移量)
+		setMiterLimit - 设置最大斜接长度
+			斜接长度指的是在两条线交汇处内角和外角之间的距离；
+			当 setLineJoin() 为 miter 时才有效。超过最大倾斜长度的，连接处将以 lineJoin 为 bevel 来显示；
 	矩形
 		rect - 创建一个矩形
-		fillRect - 填充一个矩形
+			 用 fill() 或者 stroke() 方法将矩形真正的画到 canvas 中
+		fillRect - 填充一个矩形	
+			用 setFillStyle() 设置矩形的填充色，如果没设置默认是黑色
 		strokeRect - 画一个矩形（不填充）
+			用 setFillStroke() 设置矩形线条的颜色，如果没设置默认是黑色
 		clearRect - 在给定的矩形区域内，清除画布上的像素
+			
 	路径
-		fill - 对当前路径进行填充
-		stroke - 对当前路径进行描边
+		fill - 对当前路径进行填充，默认的填充色为黑色
+			 如果当前路径没有闭合，fill() 方法会将起点和终点进行连接，然后填充；
+			 fill() 填充的的路径是从 beginPath() 开始计算，但是不会将 fillRect() 包含进去；
+		stroke - 对当前路径进行描边 默认颜色色为黑色
+			stroke() 描绘的的路径是从 beginPath() 开始计算，但是不会将 strokeRect() 包含进去
 		beginPath - 开始一个路径
+			需要调用fill或者stroke才会使用路径进行填充或描边；
+			同一个路径内的多次setFillStyle()、setStrokeStyle()、setLineWidth()等设置，以最后一次设置为准；
 		closePath - 关闭一个路径
+			如果关闭路径后没有调用 fill() 或者 stroke() 并开启了新的路径，那之前的路径将不会被渲染；
 		moveTo - 把路径移动到画布中的指定点，但不创建线条
+			用 stroke() 方法来画线条
 		lineTo - 添加一个新点，然后在画布中创建从该点到最后指定点的线条
 		arc - 添加一个弧形路径到当前路径，顺时针绘制
+			创建一个圆可以用 arc() 方法指定其实弧度为0，终止弧度为 2 * Math.PI;
+			用 stroke() 或者 fill() 方法来在 canvas 中画弧线;
+			参数说明：
+				x 圆心x
+				y 圆心y
+				r 半径
+				sAngle 起始弧度，单位弧度（在3点钟方向）
+				eAngle 终止弧度
+				counterclockwise 指定弧度的方向是逆时针还是顺时针。默认是false，即顺时针
 		quadraticCurveTo - 创建二次方贝塞尔曲线
+			曲线的起始点为路径中前一个点；
+			参数说明：
+				cpx 贝塞尔控制点x坐标
+				cpy 贝塞尔控制点y坐标
+				x	结束点x
+				y	结束点y
 		bezierCurveTo - 创建三次方贝塞尔曲
+			曲线的起始点为路径中前一个点；
+			参数说明：
+				cp1x 第一个贝塞尔控制点x坐标
+				cp1y 第一个贝塞尔控制点y坐标
+				cp2x 第二个贝塞尔控制点x坐标
+				cp2y 第二个贝塞尔控制点y坐标
+				x	结束点x
+				y	结束点y
 	变形
 		scale - 对横纵坐标进行缩放
+			在调用scale方法后，之后创建的路径其横纵坐标会被缩放。多次调用scale，倍数会相乘；
 		rotate - 对坐标轴进行顺时针旋转
+			以原点为中心，原点可以用 translate方法修改。顺时针旋转当前坐标轴。多次调用rotate，旋转的角度会叠加
 		translate - 对坐标原点进行缩放
-	文字	
+			对当前坐标系的原点(0, 0)进行变换，默认的坐标系原点为页面左上角
+	文字
+		clip - 从原始画布中剪切任意形状和尺寸
+			一旦剪切了某个区域，则所有之后的绘图都会被限制在被剪切的区域内（不能访问画布上的其他区域）;
+			可以在使用 clip() 方法前通过使用 save() 方法对当前画布区域进行保存，并在以后的任意时间对其进行恢复（通过 restore() 方法）;
 		fillText - 在画布上绘制被填充的文本
+			参数说明:
+				text 在画布上输出的文本 String
+				x		绘制文本的左上角x坐标位置
+				y		绘制文本的左上角y坐标位置
+				maxWidth	需要绘制的最大宽度，可选
 		setFontSize - 设置字体大小
+			参数说明： 
+				fontSize 字体的字号 Number
 		setTextBaseLine - 设置字体基准线
+			参数说明：
+				textBaseline 可选值  'top'、'bottom'、'middle'、'normal'
 		setTextAlign - 设置字体对齐方式
+			参数说明：
+				align 可选值 ‘left’、‘center’、‘right’
 	图片
 		drawImage - 在画布上绘制图像
+			参数说明：
+				imageResource  所要绘制的图片资源
+				dx	图像的左上角在目标canvas上 X 轴的位置
+				dy
+				dWidth	在目标画布上绘制图像的宽度，允许对绘制的图像进行缩放
+				dHeight
+				sx	源图像的矩形选择框的左上角 X 坐标
+				sy
+				sWidth	源图像的矩形选择框的高度
+				sHeight
+			三个版本写法：
+				drawImage(dx, dy)
+				drawImage(dx, dy, dWidth, dHeight)
+				drawImage(sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) 从 1.9.0 起支持
 	混合
 		setGlobalAlpha - 设置全局画笔透明度
 	其他
 		save - 保存当前绘图的上下文
 		restore - 恢复之前保存过的绘图上下文
 		draw - 进行绘图
+			将之前在绘图上下文中的描述（路径、变形、样式）画到 canvas 中；
+			绘图上下文需要由 wx.createCanvasContext(canvasId) 来创建；
+			参数说明：
+				reserve 非必填。本次绘制是否接着上一次绘制，即reserve参数为false，则在本次调用drawCanvas绘制之前native层应先清空画布再继续绘制；
+						若reserver参数为true，则保留当前画布上的内容，本次调用drawCanvas绘制的内容覆盖在上面，默认 false
+				callback 绘制完成后回调
+		
 		getActions - 获取当前context上存储的绘图动作(不推荐使用)
 		clearActions - 清空当前的存储绘图动作(不推荐使用)
+		measureText - 测量文本尺寸信息，目前仅返回文本宽度。同步接口
+			参数：text 要测量的文本 String
+			返回参数：返回TextMetrucs对象 width 文本宽度 Number		arcTo - 根据控制点和半径绘制圆弧路径
+			canvasContext.arcTo(x1, y1, x2, y2, radius)
+			第一控制点(x1,y1)第二控制点(x2,y2)
+			radius 圆弧半径
+		strokeText - 给定的 (x, y) 位置绘制文本描边的方法
+			canvasContext.strokeText(text, x, y, maxWidth)
+			文本起始点坐标(x,y)
+		lineDashOffset - 设置虚线偏移量的属性 初始值为0
+		createPattern - 对指定的图像创建模式的方法，可在指定的方向上重复元图像
+			canvasContext.createPattern(image, repetition)
+			image:重复的图像源，仅支持包内路径和临时路径
+			repetition ：指定如何重复图像，有效值有: repeat, repeat-x, repeat-y, no-repeat
+		font - 设置当前字体样式的属性
+			style 字体样式。仅支持 italic, oblique, normal
+			weight 字体粗细。仅支持 normal, bold
+			size 字体大小
+			family 字体族名。注意确认各平台所支持的字体
+		setTransform - 使用矩阵重新设置（覆盖）当前变换的方法
+			canvasContext.setTransform(scaleX, skewX, skewY, scaleY, translateX, translateY)
+			scaleX 水平缩放
+			skewX 水平倾斜
+			skewY 垂直倾斜
+			scaleY 垂直缩放
+			translateX 水平移动
+			translateY 垂直移动
+3.在Canvas上画图		
+	
+	所有在<canvas/>中的画图必须用JS完成；
+	在JS中一般在onLoad中；
+	
+	步骤：
+	1.创建一个Canvas绘图上下文CanvasContext；
+		const ctx = wx.createCanvasContext('myCanvas', this)
+	2.使用Canvas绘图上下文CanvasContext 进行绘图描述；
+		ctx.setFillStyle('red')//设置填充颜色
+       ctx.fillRect(10,10,150,75)//填充一个矩形fillRect(x, y, width, height)
+	3.绘图
+		ctx.draw()//进行绘图	
+4.Canvas坐标系
+	
+	canvas是在一个二维的网格当中；
+	左上角的左标为(0,0);
+5.渐变
+	
+	能用于填充一个矩形、圆、线、文字等；
+	
+	颜色渐变的方式：
+		const grd = ctx.createLinearGradient(x,y,x1,y1)//创建一个线性的渐变
+	一旦创建了一个渐变对象，必须添加两个指定颜色的渐变点：
+		grd.addColorStop(postion,color) // 用于指定颜色渐变点的位置和颜色，postion必须位于0到1之间
+    	grd.addColorStop(postion,color)
+    可以用setFillStyle() 和 setStrokeStyle() 方法设置渐变，然后进行画图描述；
+	
+	eg:
+	
+	const ctx = wx.createCanvasContext('myCanvas', this)
+	
+	//线性渐变
+    const grd = ctx.createLinearGradient(0,0,200,0)
+    
+	//圆心渐变
+	const grd = ctx.createCircularGradient(75,50,50)
+
+	grd.addColorStop(0,'red')
+    grd.addColorStop(1,'white')
+    ctx.setFillStyle(grd)
+	ctx.fillRect(10,10,150,75)//填充一个矩形
+    ctx.draw()//进行绘图
+6.color
+	
+	表示canvas中使用的颜色：
+		RGB    	'rgb(255,0,0)'
+		RGBA	 	'rgba(255,0,0,0.3)'
+		16进制 	  	'#ff0000'
+		预定义颜色  'red'
+	color name 大小写不敏感
+
+
 八、下拉刷新
 1.Page.onPullDownRefresh - Page中配置下拉刷新
 	
@@ -579,10 +767,8 @@ wx.pageScrollTo - 将页面滚动到目标位置
 3.wx.stopPullDownRefresh - 停止当前页面的下拉刷新
 	
 	当处理完数据刷新后，停止下拉刷新；
-	
-
 九、WXML节点 
-
+	...
 
 
 

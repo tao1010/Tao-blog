@@ -113,26 +113,81 @@ categories: iOS
 		xm中的‘x’代表这个文件支持Logos语法，后缀名是单独的一个x，表示源文件支持Logos和C语法，后缀名是xm，表示源文件支持Logos和C/C++语法
 		基本的Logos语法包含:%hook、%log 、%orig这3个预处理指令；
 			%hook 指定需要hook的class,必须以 %end结尾
-			
+			eg:
+				%hook SpringBoard
+				- (void)menuButtonDown:(id)down{
+					NSLog(@"你按下了home键");
+					%orig; //调用menuButtonDown的原始函数
+				}
+				%end
+				解析：hook住SpringBoard类中的menuButtonDown：函数，先将“你按下了home键”写入syslog，再执行函数的原始操作。
 			%log 在%hook内部使用，将函数的类名、参数等信息写入syslog，可以按%log([(<type>)<expr>,...])的格式追加其他打印信息
-			
+			eg:
+				%hook SpringBoard
+				- (void)menuButtonDown:(id)down{
+					%log((NSString *)@"iOSRE",(NSString *)@"Debug");
+					%orig; //调用menuButtonDown:的原始函数
+				}
+				%end
 			%orig 在%hook内部使用,执行被hook的函数的原始代码
-			
-			%group
-			%init
-			%ctor
-			%c
+				%hook SpringBoard
+				- (BOOL)launchApplicationWithIdentifier:(id)identifier suspended:(BOOL)suspended{
+					NSLog(@"启动%@",identifier);
+					return %orig; 
+				}
+				%end
+				如果去掉%orig，原始函数不会得到执行：
+				%hook SpringBoard
+				- (void)menuButtonDown:(id)down{
+					//按下home键没反应
+				}
+				%end
+				利用%orig修改原始函数的参数
+				%hook SpringBoard
+				- (BOOL)launchApplicationWithIdentifier:(id)identifier suspended:(BOOL)suspended{
+					NSLog(@"启动MobilePhone");
+					return %orig(@"com.apple.mobilephone",suspended); 
+				}
+				%end
+			%group用于将%hook分组，必须以%end结尾，一个%group可以包含多个%hook，所以不属于某个自定义组的%hook被隐式归类到%group_ungrouped中；
+				%group必须配合%init使用才能生效；
+			%init 用于初始化某个%group，必须在%hook或%ctor内调用；
+			%ctor tweak的构造函数完成初始化工作
+			%new 在%hook内部使用，为一个现有的class添加新函数，功能与class_addMethod相同；
+			%c作用等同于objec_getClass(),即获取一个类的定义；
 编译+打包+安装
 	
 	编译
-	
+		Theos采用与debian相同的make命令来编译tweak工程，若Terminal提示“command not found”表示没有安装CLT(command line tools)
+		终端命令：make 
 	打包
-	
+		终端命令：make package
+		最终格式为：.deb的后缀文件
 	安装
-			
+		方法一：图形界面安装法
+			1.通过iFunBox、iTools等软件把deb拖到iOS中去；
+			2.然后通iFile安装；
+			3.最后用SBSetting来respring一下；
 		
-2.4tweak示例
+		方法二：命令行安装法	
+			前提：越狱iOS安装OpenSSH
+			1.在MakeFile的最上行加上"THEOS_DEVICE_IP=本机IP"；
+			2.调用“make package install” 完成编译、打包、安装；
+			通过设置iOS的authorized_keys省略SSH输入密码的步骤：
+			1.删除
+			2.生成authorized_keys
+			3.配置iOS
+	清理
+		命令：make clean
+		
+2.4tweak示例		
+编辑control		
 
+编辑xx.plist
+
+编辑MakeFile
+
+编辑Tweak.xm
 
 
 3.Reveal			
@@ -252,3 +307,5 @@ categories: iOS
 10.[下载地址:IDA](https://www.hex-rays.com/products/ida/index.shtml)    
 11.[工具:PonyDebugger]()	 
 12.[control更多信息查阅](http://www.debian.org/doc/debian-policy/ch-controlfields.html)
+13.[Logos预处理指令](http://iphonedecwiki.net/index.php/Logos)    
+14.[DEBIAN官方文档](htt://www/debian.org/doc/debian-policy)
