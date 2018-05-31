@@ -1,8 +1,8 @@
 ---
 title: 微信小程序-API-设备
 date: 2018-05-31 13:18:30
-tags:
-categories:
+tags: 微信小程序
+categories: 小程序
 ---
 
 一、系统信息 - 真机测试		
@@ -275,17 +275,9 @@ categories:
 
 八、罗盘
 
-
 九、iBeacon
 
 十、加速度计
-
-
-
-
-
-
-
 
 
 
