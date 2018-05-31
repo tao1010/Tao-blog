@@ -767,13 +767,39 @@ wx.pageScrollTo - 将页面滚动到目标位置
 3.wx.stopPullDownRefresh - 停止当前页面的下拉刷新
 	
 	当处理完数据刷新后，停止下拉刷新；
-九、WXML节点 
-	...
+九、WXML节点 		
+1.节点信息
+	
+	wx.createSelectorQuery() - 返回一个SelectorQuery对象实例
+		使用select等方法选择节点；
+		使用boundingClientRect等方法选择需要查询的信息；
+		selectorQuery对象的方法列表：
+			in - 将选择权的选取范围更改为自定义组件componet内;
+			select - 在当前页面下选择第一个匹配选择器selector的节点，返回一个NodeRef对象实例，可以获取节点信息;
+			selectAll - 在当前页面下选择匹配选择器selector的节点，返回一个NodesRef对象实例。 与selectorQuery.selectNode(selector)不同的是，它选择所有匹配选择器的节点;
+			selectViewport - 选择显示区域，可用于获取显示区域的尺寸、滚动位置等信息，返回一个NodesRef对象实例;
+			exec - 执行所有请求，请求结果按照请求次序构成数组，在callback的第一个参数重返回;
+		NodesRef对象实例方法列表：
+			nodesRef.boundingClientRect([callback]) - 添加节点的布局位置的查询请求，相对于显示区域，以像素为单位;
+			nodesRef.scrollOffset([callback]) - 添加节点的滚动位置查询请求，以像素为单位。节点必须是scroll-view或者viewport。返回值是nodesRef对应的selectorQuery
+			nodesRef.fields(fields,[callback]) - 获取节点的相关信息，需要获取的字段在fields中指定。返回值是nodesRef对应的selectorQuery
+			
+2.节点布局相交状态			
+常常可以用于推断某些节点是否可以被用户看见、有多大比例可以被用户看见；
+	
+	API相关概念：
+		参照节点：监听的参照节点，取它的布局区域作为参照区域。如果有多个参照节点，则会取它们布局区域的 交集 作为参照区域。页面显示区域也可作为参照区域之一。
+		目标节点：监听的目标，默认只能是一个节点（使用 selectAll 选项时，可以同时监听多个节点）。
+		相交区域：目标节点的布局区域与参照区域的相交区域。
+		相交比例：相交区域占参照区域的比例。
+		阈值：相交比例如果达到阈值，则会触发监听器的回调函数。阈值可以有多个
+	wx.createIntersectionObserver([this], [options]) - 创建并返回一个 IntersectionObserver 对象实例。在自定义组件中，可以使用 this.createIntersectionObserver([options]) 来代替
 
-
-
-
-
+	intersectionObserver对象实例的方法列表:
+		intersectionObserver.relativeTo(selector, [margins]) - 使用选择器指定一个节点，作为参照区域之一。 margins 可以用来扩展（或收缩）参照节点布局区域的边界，可包含 left 、 right 、 top 、 bottom 四项;
+		intersectionObserver.relativeToViewport([margins]) - 指定页面显示区域作为参照区域之一。 margins 可以用来扩展（或收缩）参照节点布局区域的边界，可包含 left 、 right 、 top 、 bottom 四项;
+		intersectionObserver.observe(targetSelector, callback) - 指定目标节点并开始监听相交状态变化情况。回调函数 callback 包含一个参数 result;
+		intersectionObserver.disconnect() - 停止监听。回调函数将不再触发;
 参考资料：		
 1.[API界面](https://developers.weixin.qq.com/miniprogram/dev/api/api-react.html)		
 2.[tabBar](https://developers.weixin.qq.com/miniprogram/dev/api/ui-tabbar.html)		
