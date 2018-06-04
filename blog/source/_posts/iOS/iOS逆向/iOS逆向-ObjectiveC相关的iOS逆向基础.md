@@ -8,3 +8,10 @@ categories: iOS
  
  
  第五章...
+ 
+ 
+ 
+ 
+ 参考资料:		
+ 1.[iOS工具 - Cydia](http://cydia.radare.org/)	
+ 2.[砸壳 - dumpdecrypted](https://github.com/stefanesser/dumpdecrypted/archive/master.zip)

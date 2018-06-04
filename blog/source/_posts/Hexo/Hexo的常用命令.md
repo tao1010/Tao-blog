@@ -86,10 +86,22 @@ hexo migrate <type> //从其他博客系统 迁移内容。
 ``` bash
 hexo clean <type> //在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令
 ```
+11.草稿相当于博客私密文章
 
+	命令：
+		hexo new draft "new draft"
+	会在source/_drafts目录下生成一个new-draft.md文件；这个文件不被显示在页面上，链接也访问不到。也就是说如果你想把某一篇文章移除显示，又不舍得删除，可以把它移动到_drafts目录之中；
+	如果你希望强行预览草稿：
+		更改配置文件：
+			render_drafts: true
+		或者，如下方式启动server：
+			hexo server --drafts
+	把草稿变成文章，或者页面：
+	hexo publish [layout] <filename>
+	
 参考资料：
 
-1.[hexo建站](https://hexo.io/zh-cn/docs/setup.html)
-
+1.[hexo建站](https://hexo.io/zh-cn/docs/setup.html)	
+2.[文章和草稿](https://blog.csdn.net/wizardforcel/article/details/40684575)
 
 
