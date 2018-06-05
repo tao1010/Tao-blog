@@ -155,23 +155,284 @@ categories: 小程序
 
 三、用户信息		
 1.wx.getUserInfo - 获取用户信息
-
+	
+	此接口有调整，使用该接口将不再出现授权弹窗，请使用 <button open-type="getUserInfo"></button> 引导用户主动进行授权操作;
+	当用户未授权过，调用该接口将直接报错;
+	当用户授权过，可以使用该接口获取用户信息;
+	object参数说明:
+		withCredentials 是否带上登录态信息 Boolean
+		lang	指定返回用户信息的语言，zh_CN简体中文，zh_TW繁体中文，en英文，默认en
+		timeout	超时时间 单位ms
+		success/fail/complete 回调函数
+		
+		当 withCredentials 为 true 时，要求此前有调用过 wx.login 且登录态尚未过期，此时返回的数据会包含 encryptedData, iv 等敏感信息；
+		当 withCredentials 为 false 时，不要求有登录态，返回的数据不包含 encryptedData, iv 等敏感信息；
+		
+	success参数说明：
+		userInfo 	用户信息对象，不包含openid等敏感信息
+		rawData	不包括敏感信息的原始数据字符串，用于计算签名
+		signature	使用sha1(rawData+sessionkey)得到的字符串，用于校验用户信息
+		encryptedData	 包括敏感数据在内的完整用户信息的加密数据
+		iv 			加密算法的初始向量
+	userInfo参数说明：
+		nickName	用户昵称
+		avatarUrl	用户头像 最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效
+		gender	用户性别 1-男 2-女 0-未知
+		city	用户所在城市
+		province	用户所省份
+		country	用户所在国家
+		language 用户语言 
+	eg:
+	wx.getSetting({
+      success: function(res){
+        console.log(res)
+        if(res.authSetting['scope.useInfo']){
+          wx.getUserInfo({
+            success: function (res){
+              console.log(res.userInfo)
+            }
+          })
+        }
+      }
+    })
+		
 2.getPhoneNumber - 获取微信用户绑定的手机号	
 
+	需先调wx.login接口;
+	需要用户主动触发才能发起获取手机号接口，需用<button>组件的点击来触发;
+	该接口针对非个人开发者，且完成了认证的小程序开放;
+	使用方法：
+		在button组件中设置open-type值，bindgetphonenumber点击事件，通过点击事件的回调获取微信服务器返回的加密数据，然后在第三方服务器结合session_key、app_id进行解密获取手机号码;
+		<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> </button>
+		
+		 getPhoneNumber: function(e) { 
+	        console.log(e.detail.errMsg) 
+	        console.log(e.detail.iv) 
+	        console.log(e.detail.encryptedData) 
+	    }
+	返回参数：
+   		encryptedData 包括敏感数据在内的完整用户信息的加密数据
+   			phoneNumber	用户绑定的手机号（国外手机号有区号）
+   			purePhoneNumber	没有区号的手机号
+   			countryCode	区号
+   		iv	加密算法的初始向量
+	tips:
+	  在回调中调用 wx.login 登录，可能会刷新登录态。此时服务器使用 code 换取的 sessionKey 不是加密时使用的 sessionKey，导致解密失败。
+	  建议开发者提前进行 login；或者在回调中先使用 checkSession 进行登录态检查，避免 login 刷新登录态 	  
 3.UnionID机制说明
+	
+	同一用户，对同一个微信开放平台下的不同应用，unionid是相同的;
+	获取途径：（绑定开发者账号）
+		wx.getUserInfo,从解密数据中获取Unionid;（需授权）
+		wx.login获取用户Unionid，无需授权;（开发者帐号下存在同主体的公众号，并且该用户已经关注了该公众号）
+		wx.login获取用户Unionid，无需授权;（开发者帐号下存在同主体的公众号或移动应用，并且该用户已经授权登录过该公众号或移动应用）
+
+四、微信支付微信运动
+1.wx.requestPayment - 发起微信支付
+	
+	6.5.2 及之前版本中，用户取消支付不会触发 fail 回调，只会触发 complete 回调，回调 errMsg 为 'requestPayment:cancel'
+	object参数说明:
+		timeStamp 时间戳从1970年1月1日00:00:00至今的秒数,即当前的时间
+		nonceStr 随机字符串，长度为32个字符以下
+		package 统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=*
+		signType 签名算法，暂支持 MD5
+		paySign 签名
+		success/fail/complete 回调函数
+	eg:
+	wx.requestPayment({
+      timeStamp: '',
+      nonceStr: '',
+      package: '',
+      signType: '',
+      paySign: '',
+      success: function(res){
+        console.log(res)
+      },
+      fail: function(res){
+        console.log(res)
+      },
+      complete: function(res){
+        console.log(res)
+      }
+    })
+2.wx.getWeRunData - 获取用户过去三十天微信运动步数
+	
+	需要先调用wx.login接口;
+	需用用户授权scope.werun;
+	object参数说明:
+		timeout	超时时间 单位ms
+		success/fail/complete 回调函数
+	success参数说明:
+		errMsg	调用结果
+		encryptedData	 包括敏感数据在内的完整用户信息的加密数据
+			stepInfoList 用户过去三十天的微信运动步数 objectArray
+				timestamp 时间戳，表示数据对应的时间 Number
+				step		微信运动步数 Number
+		iv	加密算法的初始向量
+	eg:
+	wx.getSetting({
+      success: function (res) {
+        
+        if (res.authSetting['scope.werun']) {
+          console.log(res)
+          wx.getWeRunData({
+            success: function (res) {
+              console.log(res)
+            }
+          })
+        }else{
+          console.log('未授权')
+          wx.authorize({
+            scope: 'scope.werun',
+            success:function(res) {
+              wx.run()
+            }
+          })
+        }
+      }
+    })
+五、转发
+1.onShareAppMessage - 转发信息
+	
+	在.js文件的Page中定义函数onShareAppMessage;
+	只有定义了此事件处理函数，右上角菜单才会显示 “转发” 按钮；
+	用户点击转发按钮的时候会调用；
+	此事件需要 return 一个 Object，用于自定义转发内容；
+	options参数说明：
+		form	转发事件来源 button：页面内转发按钮；menu：右上角转发菜单
+		target 如果 from 值是 button，则 target 是触发这次转发事件的 button，否则为 undefined
+	自定义转发字段
+		title	转发标题，默认： 当前小程序名称
+		path	转发路径，默认：当前页面 path ，必须是以 / 开头的完整路径
+		imageUrl 自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
+	eg：
+	onShareAppMessage: function(){
+	    if (res.from === 'menu') {
+	      // 来自页面内转发按钮
+	      console.log(res.target)
+	    }
+	    return {
+	      title: '自定义转发标题',
+	      path: '/pages/login/login',
+	      imageUrl: '/pages/images/bd.png'
+	    }
+  	}
+2.wx.showShareMenu - 显示当前页面的转发按钮
+	
+	object参数说明:
+		withShareTicket 是否使用带shareTicket的转发
+		success/fail/complete 回调函数
+	eg：
+	wx.showShareMenu({
+      withShareTicket: true,
+      success(){
+        console.log('success')
+      }
+    })
+3.wx.hidenShareMenu - 隐藏转发按钮
+	
+	object参数说明:
+			success/fail/complete 回调函数
+	eg:
+	wx.hideShareMenu({
+      success(){
+        console.log('success')
+      }
+    })
+4.wx.updateShareMenu - 更新转发属性
+
+	object参数说明:
+		withShareTicket 是否使用带shareTicket的转发
+		success/fail/complete 回调函数
+	eg：
+  	wx.updateShareMenu({
+	  withShareTicket: true,
+	  success() {
+	  		console.log('success')
+	  }
+	})
+ 5.wx.getShareInfo - 获取转发详情信息
+ 
+ 	object参数说明:
+ 		shareTicket 必填 String
+ 		timeout	超时时间
+ 		success/fail/complete 回调函数
+ 	返回参数说明:
+ 		errMsg	错误信息
+ 		encrytedData 包括敏感数据在内的完整转发信息的加密数据
+ 			openGId 群对当前小程序的唯一 ID
+ 		iv 加密算法的初始向量
+ 	eg：
+ 	wx.getShareInfo({
+          shareTicket: '',
+          success: function(res){
+            console.log(res)
+          }
+        })
+6.获取更多转发信息
+ 
+ 	通常开发者希望转发出去的小程序被二次打开的时候能够获取到一些信息，例如群的标识。
+ 	通过调用 wx.showShareMenu 并且设置 withShareTicket 为 true ，当用户将小程序转发到任一群聊之后，此转发卡片在群聊中被其他用户打开时，可以在 App.onLaunch() 或 App.onShow 获取到一个 shareTicket。
+ 	通过调用 wx.getShareInfo() 接口传入此 shareTicket 可以获取到转发信息
+7.页面内转发
+	
+	通过给 button 组件设置属性 open-type="share"，可以在用户点击按钮后触发 Page.onShareAppMessage() 事件，如果当前页面没有定义此事件，则点击后无效果 
+ 
+8.Tip
+
+    不自定义转发图片的情况下，默认会取当前页面，从顶部开始，高度为 80% 屏幕宽度的图像作为转发图片。
+	转发的调试支持请查看 普通转发的调试支持 和 带 shareTicket 的转发
+	只有转发到群聊中打开才可以获取到 shareTickets 返回值，单聊没有 shareTickets
+	shareTicket 仅在当前小程序生命周期内有效
+	由于策略变动，小程序群相关能力进行调整，开发者可先使用wx.getShareInfo接口中的群ID进行功能开发
+六、收获地址和获取二维码
+1.wx.chooseAddress - 编辑用户收货地址
+	
+	调起用户编辑收货地址原生界面，并在编辑完成后返回用户选择的地址；
+	需要用户授权 scope.address；
+	object参数说明：
+		
+	success参数说明:
+	
+	eg：
+	
+2.获取二维码
+
+3.获取小程序码
+
+4.获取小程序二维码
 
 
-四、微信支付
+七、卡券和发票		
+1.wx.addCard - 批量添加卡券
+
+2.wx.openCard - 查看微信卡包中的卡券
+
+3.会员卡组件
+ 
+4.wx.chooseInvoiceTitle - 选择用户的发票抬头
+
+八、设置和打开程序		
+1.wx.openSetting - 调起客户端小程序设置界面，返回用户设置的操作结果
+
+2.wx.getSetting - 获取用户的当前设置
+
+3.wx.navigateToMiniProgram - 打开同一公众号下关联的另一个小程序
+
+	此接口即将废弃，请使用 <navigator> 组件来使用此功能
+4.wx.navigateBackMiniProgram - 返回到上一个小程序，只有在当前小程序是被其他小程序打开时可以调用成功
 
 
-五、模版消息
+5.launchApp - 打开APP
 
-
-
+ 
+ 
+ 
+ 
 参考资料：		
 1.[开发接口](https://developers.weixin.qq.com/miniprogram/dev/api/api-login.html)		
 2.[UnionID机制说明](https://developers.weixin.qq.com/miniprogram/dev/api/unionID.html)		
-3.[]()		
+3.[小程序支付接口文档](https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=3)		
 4.[]()		
 
 
