@@ -13,7 +13,8 @@ categories: iOS
 	解决方法：
 	UIButtonTypeSystem --> UIButtonTypeCustom
 2.图文排序		
-UIEdgeInsets insets = {top, left, bottom, right}    
+UIEdgeInsets insets = {top, left, bottom, right};        
+正数就是距相应的边的距离增加，负数就是距相应的距离减少;      
 ![edgeinsets](edgeinsets.png)	     
 
 	蓝色标识为可变区域， 绿色标识为不变区域。
@@ -23,11 +24,43 @@ UIEdgeInsets insets = {top, left, bottom, right}
 		(2)控件高度大于图片高度，拉伸黑色虚线矩形
 		(3)控制宽度小于图片宽度时，横向整体缩小(可变区与不变区比例不变)
 		(4)控制高度小于图片高度时，纵向整体缩小(可变区与不变区比例不变)
+eg:			
+UIEdgeInsets insets = {top, left, bottom, right}	      
+正数就是距相应的边的距离增加，负数就是距相应的距离减少					
+![button1](button1.png)
 
-
-	
-	
-	
+	1.图左文右 - 默认状态:
+		UIButton *button1 = [buttonArray objectAtIndex:0];
+		[button1 setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,0)];
+	    [button1 setTitleEdgeInsets:UIEdgeInsetsMake(0,0,0,0)];
+	2.图片文字同时居中：
+		图 右移Label Width
+		文 左移ImageView Height
+		UIButton *button2 = [buttonArray objectAtIndex:1];
+		[button2 setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,-button2.titleLabel.intrinsicContentSize.width)];
+		[button2 setTitleEdgeInsets:UIEdgeInsetsMake(0,-button2.currentImage.size.width,0,0)];
+	3.图右 文左
+		图 右移Label Width + 右移Label Width  
+		文 左移ImageView Height + 左移ImageView Height
+		UIButton *button3 = [buttonArray objectAtIndex:2];
+    	[button3 setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,-button3.titleLabel.intrinsicContentSize.width * 2)];
+    	[button3 setTitleEdgeInsets:UIEdgeInsetsMake(0,-button3.currentImage.size.width * 2,0,0)];
+    	
+	4.图上 文下	
+		图 右移Label Width，上移Label Height
+		文 左移ImageView Width，下移ImageView Height
+		UIButton *button4 = [buttonArray objectAtIndex:3];
+	    [button4 setImageEdgeInsets:UIEdgeInsetsMake(-button4.titleLabel.intrinsicContentSize.height,0,0,-button4.titleLabel.intrinsicContentSize.width)];
+        [button4 setTitleEdgeInsets:UIEdgeInsetsMake(0,-button4.currentImage.size.width,-button4.currentImage.size.height,0)];
+    5.图文显示其一:
+		图 或 文 居中显示	
+		UIButton *button5 = [buttonArray objectAtIndex:4];
+	6.图下 文上
+		图 右移Label Width，下移Label Height
+		文 左移ImageView Width，上移ImageView Height
+		UIButton *button6 = [buttonArray objectAtIndex:5];
+    [button6 setImageEdgeInsets:UIEdgeInsetsMake(0,0,-button6.titleLabel.intrinsicContentSize.height,-button6.titleLabel.intrinsicContentSize.width)];
+    [button6 setTitleEdgeInsets:UIEdgeInsetsMake(-button6.currentImage.size.height,-button6.currentImage.size.width,0,0)];
 	
 二、UITableView		
 1.最后一个Cell不显示分割线		
@@ -62,7 +95,17 @@ UIEdgeInsets insets = {top, left, bottom, right}
 	        }
 	    }
 	}
-
+2.delegate执行的先后顺序：
+	
+	- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+	- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+	- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
+	- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section;
+	- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section;
+	- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+	
 三、UINavigationBar		
 1.导航栏渐变	
 	
