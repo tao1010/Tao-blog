@@ -27,7 +27,15 @@ categories: iOS
 2.[开发者账号忘记密保问题答案怎么办](https://www.jianshu.com/p/ca8024da59ec) 
 
 		
+三、HTTPS证书过期
 
+当客户端配置的HTTPS证书过期时，AFNetWorking请求会出现code=-999,canceled 的情况,仅需要更新HTTPS证书就好。
+
+生产客户端HTTPS证书方法：
+	
+	在浏览器打开网址，如：https://developers.weixin.qq.com/miniprogram/dev/component/
+	点击🔒的图标，会显示弹框，显示证书，将需要的子证书拖拽到桌面上即可；
+![cer](cer.png)
 
 
 
