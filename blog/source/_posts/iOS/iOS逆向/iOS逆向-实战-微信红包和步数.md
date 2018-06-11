@@ -122,9 +122,10 @@ categories: iOS
 			insert_dylib --all-yes @executable_path/test.dylib Payload/WeChat.app/WeChat
 			或
 			optool install -c load -t "@executable_path/test.dylib" -p Payload/WeChat.app/WeChat	 
+	注释:
+		@executable_path 这个变量表示可执行程序所在的目录. 比如 /path/QQ.app/Contents/MacOS/
+		@loader_path 这个变量表示每一个被加载的 binary (包括App, dylib, framework,plugin等) 所在的目录
 		
-		
-	
 6.用[MachOView 工具](https://sourceforge.net/projects/machoview/) 查看新的动态库是否已经被注入了
 	
 7.修改 WeChat_patched -->WeChat 替换原来的文件，然后和ModifyStepCount.dylib 动态库一起放入WeChat.app中
@@ -134,7 +135,7 @@ categories: iOS
 
 	用xcode打开，选择证书和签名
 		
-	
+		
 五、微信红包<br>
 
 
@@ -155,7 +156,6 @@ categories: iOS
 	
 	一般我们得到的iOS程序包是.ipa文件。其实就是一个压缩包，解压缩.ipa。解压缩后里面会有一个payload文件夹，文件夹里有一个.app文件，右键显示包内容，然后找到一个一般体积最大跟.app同名的文件，那个文件就是可执行文件；
 	
-
 
 参考资料：			
 1.[非越狱微信步数和红包](https://www.jianshu.com/p/7c0c2bcbbaf2)	<br>
