@@ -1,7 +1,7 @@
 ---
 title: iOS第三方库-SDK开发
 date: 2018-05-17 22:44:08
-tags: OC
+tags: iOS第三方库
 categories: iOS
 ---
 

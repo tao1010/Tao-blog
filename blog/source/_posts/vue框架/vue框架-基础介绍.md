@@ -1,6 +1,6 @@
 ---
 title: vue框架-基础介绍
-date: 2018-06-14 11:22:51
+date: 2018-06-13 11:22:51
 tags: vue
 categories: Web
 ---
