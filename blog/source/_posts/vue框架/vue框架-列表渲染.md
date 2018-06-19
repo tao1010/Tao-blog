@@ -99,7 +99,32 @@ categories: Web
 在遍历对象时，是按 Object.keys() 的结果遍历，但是不能保证它的结果在不同的 JavaScript 引擎下是一致的.<br>
 3.key
 
-4.数组更新检测
+	
+	
+4.数组更新检测<br>
+变异方法
+
+	push()
+	pop()
+	shift()
+	unshift()
+	splice()
+	sort()
+	reverse()
+	
+	在控制台输入上述变异方法：
+	eg:example1.items.push({ message: 'Baz' })
+替换数组
+	
+	filter()
+	concat()
+	slice()
+	
+	不会改变原始数组，但会返回一个新数组，可以用新数组替换原来的旧数组,Vue 不会 丢弃之前的DOM，重新渲染整个列表，Vue会使用智能的、启发式的方法。
+	eg:
+		example1.items = example1.items.filter(function (item) {
+			  return item.message.match(/Foo/)
+		})
 
 5.对象更新检测
 
