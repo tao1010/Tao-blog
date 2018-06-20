@@ -8,6 +8,8 @@ categories: 博客
 
 一、意外的标记异常
 
+<!--more-->
+
 1.异常内容：
 	
 	xxx:blog xxxx$ hexo g

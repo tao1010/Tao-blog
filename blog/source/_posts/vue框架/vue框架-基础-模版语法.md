@@ -1,11 +1,14 @@
 ---
-title: vue框架-模版语法
+title: vue框架-基础-模版语法
 date: 2018-06-14 14:39:08
 tags: vue
 categories: Web
 ---
 
 1.插值<br>
+
+<!--more-->
+
 文本<br>
 	
 	数据绑定最常见的形式:使用 "Mustache" 语法 - 双大括号{{}}的文本插值

@@ -1,11 +1,14 @@
 ---
 title: 编译和打包Web
 date: 2018-06-12 08:55:09
-tags: Web
+tags: web-build
 categories: Web
 ---
 
 一、Node<br>
+
+<!--more-->
+
 1.安装[Node](https://nodejs.org)<br>
 	
 	Node和npm会 默认安装在/usr/local/bin目录下

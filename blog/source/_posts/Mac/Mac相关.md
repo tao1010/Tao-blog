@@ -7,6 +7,8 @@ categories: Mac
 
 一、软件安装
 
+<!--more-->
+
 1.文件损坏   
 ![file_bad](file_bad.jpg)
 

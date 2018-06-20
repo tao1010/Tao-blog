@@ -8,6 +8,9 @@ categories: 博客
 
 1.特殊字符
 
+<!--more-->
+
+
 由于markdown对特殊字符处理的问题,导致在运用中需要通过转义使用,常见如下:
 
 	! 	&#33; — 惊叹号Exclamation mark 

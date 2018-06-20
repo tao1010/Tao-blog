@@ -1,12 +1,13 @@
 ---
 title: 发布Web及工作原理
 date: 2018-03-07 14:39:00
-tags: web
+tags: web-build
 categories: Web
 ---
 
 一、发布网站的方法
 
+<!--more-->
 
 方法一、主机服务和域名
 

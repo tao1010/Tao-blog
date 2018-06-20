@@ -1,5 +1,5 @@
 ---
-title: vue框架-Class和Style绑定
+title: vue框架-基础-Class和Style绑定
 date: 2018-06-15 14:44:41
 tags: vue
 categories: Web
@@ -9,6 +9,8 @@ categories: Web
 	操作元素的 class 列表和内联样式是数据绑定的一个常见需求;
 	在将 v-bind 用于 class 和 style 时，Vue.js 做了专门的增强。表达式结果的类型除了字符串之外，还可以是对象或数组;
 1.绑定HTML Class
+
+<!--more-->
 	
 	对象语法
 		1.传给 v-bind:class 一个对象，以动态地切换 class

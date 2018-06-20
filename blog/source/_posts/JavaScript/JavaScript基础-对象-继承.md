@@ -5,7 +5,10 @@ tags: JavaScript
 categories: Web
 ---
 
-一、原型式继承		
+一、原型式继承	
+
+<!--more-->
+	
 JavaScript继承的对象函数并不是通过复制而来，而是通过原型链继承（通常被称为 原型式继承 —— prototypal inheritance）     
 1.例子	
 

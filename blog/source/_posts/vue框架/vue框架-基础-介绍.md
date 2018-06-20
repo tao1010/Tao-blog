@@ -1,11 +1,13 @@
 ---
-title: vue框架-基础介绍
+title: vue框架-基础-介绍
 date: 2018-06-13 11:22:51
 tags: vue
 categories: Web
 ---
 
 1.声明式渲染<br>
+
+<!--more-->
 
 ```html
 <head>

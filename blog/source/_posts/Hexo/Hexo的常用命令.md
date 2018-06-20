@@ -7,6 +7,9 @@ categories: 博客
 
 1.建站
 
+<!--more-->
+
+
 ``` bash
 hexo init <folder> //新建一个网站
 ```

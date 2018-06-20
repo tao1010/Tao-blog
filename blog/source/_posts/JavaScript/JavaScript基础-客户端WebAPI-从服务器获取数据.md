@@ -5,7 +5,10 @@ tags: JavaScript
 categories: Web
 ---
 
-一、更新页面数据		
+一、更新页面数据
+
+<!--more-->
+		
 问题描述：创建允许页面请求小块数据(HTML、XML、JSON或纯文本)仅在需要时显示它们.     
 1.如果加载整个页面数据
 	

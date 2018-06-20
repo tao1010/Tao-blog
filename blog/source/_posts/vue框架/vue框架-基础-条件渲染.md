@@ -1,11 +1,13 @@
 ---
-title: vue框架-条件渲染
+title: vue框架-基础-条件渲染
 date: 2018-06-15 14:45:59
 tags: vue
 categories: Web
 ---
 
 1.v-if
+	
+<!--more-->
 	
 	1.v-if 是一个指令，必须将它添加到一个元素上
 	eg1：

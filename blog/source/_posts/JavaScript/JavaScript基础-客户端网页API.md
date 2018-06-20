@@ -6,6 +6,9 @@ categories: Web
 ---
 
 一、Web API简介		
+
+<!--more-->
+
 1.概念:API(application interface)应用程序接口是以编程语言提供的结构，允许开发人员更容易地创建复杂的功能.它们抽象出更简单的代码，并提供一些简单的语法类使用.	
 2.客户端JavaScript中的API并不是JavaScript语言的一部分，建立在JavaScript语言核心的顶部，分两类:
 

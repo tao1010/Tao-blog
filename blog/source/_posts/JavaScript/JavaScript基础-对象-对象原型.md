@@ -6,6 +6,9 @@ categories: Web
 ---
 
 一、对象原型	
+
+<!--more-->
+
 1.JavaScript 常被描述为一种基于原型的语言 (prototype-based language)
 	
 	每个对象拥有一个原型对象，对象以其原型为模板、从原型继承方法和属性。		

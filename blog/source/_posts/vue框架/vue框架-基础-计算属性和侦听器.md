@@ -1,5 +1,5 @@
 ---
-title: vue框架-计算属性和侦听器
+title: vue框架-基础-计算属性和侦听器
 date: 2018-06-15 14:42:49
 tags: vue
 categories: Web
@@ -7,6 +7,8 @@ categories: Web
 
 	对于任何复杂逻辑，都应当使用计算属性;
 1.基础例子
+
+<!--more-->
 
 ```html
 <body>

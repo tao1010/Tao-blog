@@ -9,6 +9,8 @@ toc: true
 
 一、Python运行环境
 
+<!--more-->
+
 linux环境		
 虚拟机VMare Fusion		
 [ubuntu](http://www.ubuntu.org.cn/download/desktop)    

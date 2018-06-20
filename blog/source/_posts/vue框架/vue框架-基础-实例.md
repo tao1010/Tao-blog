@@ -1,11 +1,13 @@
 ---
-title: vue框架-Vue实例
+title: vue框架-基础-实例
 date: 2018-06-14 14:21:57
 tags: vue
 categories: Web
 ---
 
 1.创建Vue实例<br>
+	
+<!--more-->	
 	
 	每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例开始的;
 		var vm = new Vue({

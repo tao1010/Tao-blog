@@ -12,6 +12,8 @@ version：4.0
 
 一、[基础部分](http://www.swift51.com/swift4.0/chapter2/01_The_Basics.html)
 
+<!--more-->
+
 1.用 let 来声明常量，用 var 来声明变量
 	
 	常量的值一旦设定就不能改变，而变量的值可以随意更改.

@@ -5,7 +5,10 @@ tags: JavaScript
 categories: Web
 ---
 
-一、Web浏览器的组成			
+一、Web浏览器的组成		
+
+<!--more-->
+	
 ![document-window-navigator](document-window-navigator.png)		
 	
 1.window

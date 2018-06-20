@@ -5,7 +5,10 @@ tags: JavaScript
 categories: Web
 ---
 
-一、条件控制语句		
+一、条件控制语句
+
+<!--more-->
+		
 1.if...else		
 2.else if		
 3.关于比较运算符

@@ -5,7 +5,10 @@ tags: JavaScript
 categories: Web
 ---
 
-实现弹跳球如下图所示:		
+实现弹跳球如下图所示:	
+
+<!--more-->
+	
 ![bouncing-balls](bouncing-balls.png)		
 一、准备基础代码	
 	
