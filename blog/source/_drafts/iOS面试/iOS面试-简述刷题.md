@@ -34,7 +34,55 @@ categories: iOS
 	OCMock - 第三方测试框架
 4.iOS中OSI七层协议，TCP四层协议对应方式<br>
 ![OSI](OSI.png)<br>
-5.
+5.iOS在项目中用过runtime吗?举个例子
+
+6.iOS什么ARC?
+
+7.iOS说明并比较关键字:atomatic、nonatomic
+
+	atomatic
+		提供多线程安全；
+		描述变量是否支持多线程的同步访问；
+		系统会自动的创建lock锁，锁定变量；
+	nonatomic
+		禁止多线程，变量保护，提高性能；
+		
+	atomatic和nonatomic
+		用来决定编译器生成的getter和setter是否为原子操作；
+	
+8.iOS说明并比较关键字: __weak,_block
+
+	__weak与weak基本相同：
+		__weak 用于修饰变量(variable) 和 用于防止block中循环引用；
+		weak 用于修饰属性(property)
+	__block
+		用于修饰变量；引用修饰，其修饰的值是动态变化的(可充新赋值)
+		也可修饰某些block内部将要修改的外部变量；
+	__weak和__block
+		block是OC对与闭包(没有名字的函数或指向函数的指针)的实现；
+9.iOS说明比较关键字：strong、weak、assign、copy
+	
+	strong
+		指向并拥有对象，修饰对象引用计数+1，引用计数=0销毁，或强制销毁
+		strong的复制是多个指针指向同一个地址
+	weak
+		指向不拥有对象，修饰对象引用计数 不加，对象会自行在内存中销毁
+	assign
+		修饰基本数据类型，主要存放于栈上，内存系统自动处理
+		若修饰对象，释放后指针地址仍存在，造成野指针，堆上造成crash 
+		CGFloat、NSInterger、int、float
+	copy
+		修饰有可变对应类型的不可变对象上，复制每次会在内存中拷贝一份对象，指针指向不同地址
+		NSString、NSArray、NSDictionary
+		
+	
+	
+	
+		
+	
+
+
+
 参考资料:<br>
 1.[iOS面试大全](https://www.jianshu.com/p/1798ba01e9ef)<br>
 2.[OCMock测试框架](https://github.com/erikdoe/ocmock)<br>
