@@ -124,66 +124,6 @@ categories: Python
 		chgrp 组名 文件/目录名
 	递归修改文件/目录的所属组：
 		chgrp -R 组名 文件/目录名 
-四、用户管理
-	
-	用户管理包括用户和组的管理
-1.创建用户/设置密码/删除用户
-	
-	终端命令都需要使用sudo执行
-	增加新用户：
-		useradd -m -g 组 新建用户名 
-		# -m自动建立用户家目录 
-		# -g指定用户所在的组，否则会建立一个和同名的组
-		eg: sudo useradd -m -g dev deng #表示在dev群组下创建一个deng的新用户
-	设置密码：
-		passwd 用户名 #普通用户直接使用passwd可以修改自己密码
-		eg:sudo passwd deng
-	删除用户：
-		userdel -r 用户名 #-r选项会自动删除用户家目录
-		eg:sudo userdel -r deng
-	确认用户信息：
-		cat /etc/passwd|grep 用户名 #新建用户后，用户信息会保存在 /etc/passwd 文件中
-		eg：cat -n /etc/passwd #-n表示显示行号的家目录信息列表
-			cat -n /etc/passwd | grep deng #显示deng的用户信息
-	passwd文件
-		/etc/passwd 文件存放的是用户的信息，由6个分号组成的7个信息：
-			1.用户名
-			2.密码(x,表示加密的密码)
-			3.UID(用户标识)
-			4.GID(组标识)
-			5.用户全名或本地账号
-			6.家目录
-			7.登录使用的Shell，即登录之后使用的终端命令，ubutu默认dash
-2.查看用户信息
-	
-	查看用户UID和GID信息：
-		id [用户名] #G group组
-	查看当前所有登录的用户列表：
-		who 
-	查看当前登录用户的账户名：
-		whoami
-3.usermod
-	
-	设置主组和附加组
-	
-		
-		
-	指定用户登录shell
-	
-	
-
-	
-五、系统信息
-
-六、其他命令
-
-七、打包压缩
-
-八、软件安装
-
-
-
-
 参考资料:    
 1.[黑马视频 - 密码:m8tu](https://pan.baidu.com/s/1o3eZ1nJTKDi4PRZpeUizgw)<br>
 2.[在Mac OS X上开启ssh服务](https://blog.csdn.net/xicikkk/article/details/53447025)<br>
