@@ -36,6 +36,19 @@ categories: iOS
 ![OSI](OSI.png)<br>
 5.iOS在项目中用过runtime吗?举个例子
 
+	关联对象 Associated Objects
+	消息发送 Messaging
+	消息转发 Message Forwarding
+	方法调配 Method Swizzling
+	类对象 NSProxy Foundation 
+	KVO、KVC 
+	
+	易忽略：
+		动态获取class和slector
+		给分类添加属性和KVO/KVC
+	常用于：
+		在类目中添加属性；
+		修改系统方法如重写objectAtIndex方法防止数组越界；
 6.iOS什么ARC?
 
 7.iOS说明并比较关键字:atomatic、nonatomic
@@ -74,7 +87,9 @@ categories: iOS
 	copy
 		修饰有可变对应类型的不可变对象上，复制每次会在内存中拷贝一份对象，指针指向不同地址
 		NSString、NSArray、NSDictionary
-		
+10.iOS中循环引用的情况
+
+11.iOS 类-Class 和结构体-Struct
 	
 	
 	
