@@ -8,6 +8,8 @@ categories: Python
 
 一、PyCharm简介
 
+	版本号：2016.2.3
+	
 <!-- more -->
 
 1.特点
@@ -21,8 +23,20 @@ categories: Python
 2.构成<br>
 ![pycharm1](pycharm1.png)<br>
 二、PyCharm设置<br>
-
-
+1.打开目录
+	
+	打开一个项目后，会在目录先新建一个 .idea 的目录，用于保存项目相关信息:
+		解释器版本
+		项目包含文件等
+![idea](idea.png)<br>
+2.设置项目中运用的 python 解释器版本
+	
+	路径:菜单栏
+	PyCharm --> Preferences -->Project... --> Project Interpreter -->选择解释器版本
+	
+	运行配置设置：
+	Run/Debug Configurations --> Python interpreter --> 选择解释器对应的版本
+		
 
 
 
