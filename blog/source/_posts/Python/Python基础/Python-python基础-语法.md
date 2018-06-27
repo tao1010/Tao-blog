@@ -55,8 +55,16 @@ categories: Python
 	ls -lh /usr/bin/python
 4.程序作用
 
-	程序 用来 处理数据 的
-
+	程序 用来 处理数据 的,变量 就是用来 存储数据 的
+三、变量<br>
+1.变量的定义
+	
+	每个变量在使用前必须赋值,变量赋值后才能被创建
+	eg:
+		qq_number = 'x123456x'
+		qq_password = '123456'
+		print('QQ号码: ' + qq_number)
+		print('QQ密码: ' + qq_password)
 
 
 
