@@ -6,8 +6,45 @@ category: iOS
 
 ---
 
-
 1.代理delegate
+
+<!--more-->
+
+eg:
+
+	创建一个类：NetworkFetcher
+	NetworkFetcher.h
+		@protocol NetworkFetcherDelegate <NSObject>
+		
+		@required //必须执行的方法
+		
+		- (void)printHello;
+		
+		@optional //可选执行的方法
+		
+		- (void)didReceiveData:(NSData *)data;
+		- (void)didFailWithError:(NSError *)error;
+		- (void)didUpdateProgressTo:(CGFloat)progress;
+		
+		@end
+		
+		@interface GRHNetworkFetcher : NSObject
+		
+		@property (nonatomic, assign)id<NetworkFetcherDelegate> delegate;
+		
+		@end
+	NetworkFetcher.m
+		//不实现协议方法
+	
+	创建一个使用协议方法的类：A
+	A.m
+		- (void)doSometing {
+			if ([self.delegate respondsToSelector:@selector(didReceiveData:)]) {
+				[self.delegate didReceiveData:nil];
+			}
+		}
+		解析：
+			respondsToSelector: 来判断委托对象是否实现了相关方法。如果实现了，就调用；如果没有实现，就不执行任何操作；
 
 定义:一种通用的设计模式
 
@@ -88,4 +125,5 @@ tips:当在定义延展的时候不提供类目名时，延展中定义的方法
 
 参考资料：
 
-1.[代理设计模式](http://www.cocoachina.com/ios/20160317/15696.html)
+1.[代理设计模式](http://www.cocoachina.com/ios/20160317/15696.html)<br>
+2.[iOS 协议(protocol)和代理(delegate)模式详解](https://www.jianshu.com/p/4abaf1d1f044)

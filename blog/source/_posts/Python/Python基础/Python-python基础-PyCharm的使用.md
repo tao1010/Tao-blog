@@ -36,11 +36,27 @@ categories: Python
 	
 	运行配置设置：
 	Run/Debug Configurations --> Python interpreter --> 选择解释器对应的版本
-		
-
-
-
-
+3.设置字体(控制台和编辑区)
+	
+	PyCharm --> Preferences --> Editor --> Colors & Fonts
+	
+三、新建项目<br>
+1.命名规则
+	
+	建议只使用小写字母、数字、下划线
+	不能以数字开始
+2.新建项目
+	
+	菜单栏：File --> New Project...
+3.注释
+	
+	单行注释 # 
+	解释器不会解释 # 号右侧的代码
+	# 放在代码行首 建议在 # 后添加一个空格 或者 command + / 添加注释
+	# 放在代码行尾 建议在 # 空格前空2格
+	
+	多行注视或块注释
+	"""  这是一个多行注释 """
 
 参考资料:<br>
 1.[黑马视频]()

@@ -1,11 +1,14 @@
 ---
-title: iOS设计模式-MVVM和MVC
+title: iOS模式-MVVM和MVC
 date: 2018-05-14 21:45:55
-tags: OC
+tags: 模式
 categories: iOS
 ---
 
-一、MVC - Model View Controller		
+一、MVC - Model View Controller	
+
+<!--more-->
+	
 1.MVC架构特点	
 
 	尽量复用，保证重用;

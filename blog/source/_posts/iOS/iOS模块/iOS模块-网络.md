@@ -222,6 +222,19 @@ categories: iOS
 	SSL证书需要钱，功能越强大的证书费用越高，个人网站、小网站没有必要一般不会用。
 	SSL证书通常需要绑定IP，不能在同一IP上绑定多个域名，IPv4资源不可能支撑这个消耗。
 	HTTPS协议的加密范围也比较有限，在黑客攻击、拒绝服务攻击、服务器劫持等方面几乎起不到什么作用。最关键的，SSL证书的信用链体系并不安全，特别是在某些国家可以控制CA根证书的情况下，中间人攻击一样可行
+6.Https请求的过程	
+	
+	eg:客户端输入账号、密码后，点击登录，通过https请求直到客户端收到服务器返回的数据前，描述这个过程:
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 六、Socket<br>
 1.概念
 	
@@ -300,4 +313,5 @@ categories: iOS
 6.[Socket](http://www.cocoachina.com/ios/20160602/16572.html)<br>
 7.[Socket-IM](https://www.jianshu.com/p/2dbb360886a8)<br>
 8.[Https双向认证](https://www.jianshu.com/p/ba231a6b5ac4)<br>
-9.[Http和Https区别](https://www.cnblogs.com/wqhwe/p/5407468.html)
+9.[Http和Https区别](https://www.cnblogs.com/wqhwe/p/5407468.html)<br>
+10.[Https请求过程描述](https://www.jianshu.com/p/db9c716c3558)<br>
