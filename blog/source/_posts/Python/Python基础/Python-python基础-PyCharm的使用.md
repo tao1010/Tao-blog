@@ -39,7 +39,11 @@ categories: Python
 3.设置字体(控制台和编辑区)
 	
 	PyCharm --> Preferences --> Editor --> Colors & Fonts
+4.调试
 	
+	Debugger:查看变量信息
+	Console:查看输出信息
+	之前调试未关闭，再次点击调试按钮 会在控制台新开启调试窗口
 三、新建项目<br>
 1.命名规则
 	

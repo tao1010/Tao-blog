@@ -65,16 +65,111 @@ categories: Python
 		qq_password = '123456'
 		print('QQ号码: ' + qq_number)
 		print('QQ密码: ' + qq_password)
+	可以用其他变量的运算值 定义一个变量
+	eg:
+		price = 5.0
+		weight = 3
+		total = price * weight
+2.变量命名
 
+	标志符就是变量名和函数名；
+		字母、数字、下划线；
+		不能以数字开头；
+		不能与关键字重名；
+	关键字：Python内部已经使用的标志符；
+		import  #可以导入一个“工具包”
+		查看关键字：
+			import keyword #导入关键字工具包
+			print(keyword.kwlist)	# 输出关键字列表
+	Python 中的标志符 是 区分大小写的
+	变量名由多个单词组成时： - Python中推荐方法
+		每个单词都使用小写;
+		单词与单词间使用 下划线(_) 连接;
+		eg:first_name、last_name
+	驼峰命名法：
+		小驼峰
+			firstName、lastName
+		大驼峰：
+			FirstName、LastName
+3.变量类型
+	
+	在Python中，定义变量时不需要指定变量类型
+	在运行时，Python解释器，会根据赋值语句等号右侧的数据自动推导出变量中保存的数据的准确类型
+	
+	数字型
+		bool(True 或 False)
+		float
+		int # python2.x中整型包含int、long
+		complex(复数型 - 科学计算，平面场、波动、电感电容等)
+	非数字型
+		字符串 - str、
+		列表、
+		元祖、
+		字典
+	使用 type 函数 查看变量类型
+	eg:
+		name = "Jike"  #str
+		age = 18		  #int
+		gender = True  #bool
+		type(name)
+4.不同类型变量间的计算
 
+	数值型变量可以直接计算
+		布尔型 参与数字运算 True - 1  | False - 0
+	eg:
+		a = True
+		b = 10.5
+		c = b - a #  9.5	
 
-
-
-
-
-
-
-
-
+	字符串变量间 用 + 拼接字符串
+	eg:
+		firstName = "dong"
+		lastName = "haha"
+		name = firstName + lastName
+		
+	字符串变量 和 整数 用 * 拼接
+	eg:
+		firstName = "dong"		
+		name = firstName * 3 # 表示 将3个连续的firstName字符串 赋值给 name
+四、变量的输入输出<br>
+1.输入
+	
+	如果要获取用户在键盘上输入的信息，需要使用 input 函数；
+	用户输入的任何内容python都认为是一个字符串；
+	语法：变量 = input("提示信息")  
+	eg:
+		input("请输入登录账号:")
+		name = input("请输入登录账号:") # 用变量 name 接收 键盘输入的内容
+2.变量类型转换
+	
+	int(x)		 #将 x 转换为一个 整数
+	float(x)	 #将 x 转换为一个 浮点数
+	str(x)		 #将 x 转换为一个 字符串
+	eg:
+		type(int("123"))		#将字符串123 --> 整数123
+3.eg:
+	
+	price = input("请输入 apple 单价 （元/斤）：")
+	weight = input("请输入 apple 重量 (斤):")
+	money = float(price) * float(weight)
+	print("顾客支付金额 (元): " + str(money))
+	
+	等价于
+	
+	price = float(input("请输入 apple 单价 （元/斤）: "))
+	weight = float(input("请输入 apple 重量 (斤): "))
+	print("顾客支付金额 (元): " + str(price * weight))
+4.格式化输出
+	
+	%s #字符串
+	%d #有符号十进制整数 %06d 表示输出的整数显示位数，不足的地方使用0补齐
+	%f #输出 浮点数 %.02f表示小数点后显示2位
+	%% #输出%
+	格式：
+		print("格式化字符串" % 变量1)
+		print("格式化字符串" % (变量1,变量2,变量3...))
+	eg:
+		print("顾客支付金额 (元): %s " % str(price * weight))		print("顾客支付金额 (元): %.2f " % (price * weight))
+		print("顾客支付金额 (元): %06d " % int(price * weight))
 参考资料:<br>
 1.[黑马视频]()
