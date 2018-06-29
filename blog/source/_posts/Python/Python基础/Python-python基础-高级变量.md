@@ -26,6 +26,19 @@ categories: Python
 	列表的 索引|下标  从 0 开始
 	eg:
 		name_list = ["张三","李四","王五"]
+2.列表常用方法<br>
+![list_method](list_method.png)	
+
+	xx.extend # 将列表A添加到列表B中时，A、B的数据类型必须一致
+	del 列表名[下标] #关键字 del 本质上是用来将变量从内存中删除
+	xx.remove['a'] #删除一个存在的元素，如果有多个元素 a 则只删除第一次出现的a
+	eg:
+		del name_list[1] #将name_list中下标为1的元素 “李四” 从内存中删除
+3.其他
+		
+	使用关键字 后不需要 ()
+	使用函数、方法 都需要 ()	
+	
 	
 二、元祖
 
