@@ -6,6 +6,11 @@ tags: python基础
 categories: Python
 ---
 
+程序流程
+
+	顺序 - 从上而下，顺序执行
+	分支 - 根据条件判断，决定执行代码的分支
+	循环 - 让 特点代码重复 执行
 一、分支语句
 
 <!-- more -->
@@ -126,11 +131,115 @@ categories: Python
 	print("电脑出拳: %s" % computer_str)
 
 二、循环语句<br>
+1.while 循环
 
-
-
-
+	语法格式：
+		while 条件(判断 计数器 是否达到目标次数):
+			条件满足时，dosomething1
+			条件满足时，dosomething2
+			条件满足时，dosomething3
+			...
+			处理条件(计数器 + 1)
+	eg:打印5次 “Hello Pyhton”
+		count = 0
+		while count < 5:
+		    print("Hello Pyhton")
+		    count = count + 1 # <==> count += 1
+	注意可能存在死循环(未修改条件)
+2.赋值运算符
 	
+	+= # 加法赋值 a += c <==> a = a + c
+	-= # 减法赋值 a -= c <==> a = a - c
+	*= # 乘法赋值 a *= c <==> a = a * c
+	/= # 除法赋值 a /= c <==> a = a / c
+	//= # 取整除赋值 a //= c <==> a = a // c
+	%= # 取模赋值  a %= c <==> a = a % c
+	**= #幂赋值 a **= c <==> a = a ** c
+3.break和continue
+	
+	break - 退出循环，不再执行后续代码
+	continue - 退出当次循环，	继续执行下一次循环
+		注意计数变量的变化，防止死循环
+4.循环嵌套
+	
+	如果不希望末尾增加换行，可以在 print 函数输出内容的后面加上 end=""
+	其中""中间可以指定 print 函数输出内容之后继续显示的内容
+	eg:
+		print("hello",end="")
+	eg2:
+		# 实例3
+		"""
+		*
+		**
+		***
+		****
+		*****
+		"""
+		row = 1
+		while row <= 5:
+		    col = 1
+		    while col <= row:
+		        if row == col:
+		            print("*")
+		        else:
+		            print("*" , end="")
+		        col += 1
+		    row += 1
+		eg3:九九表
+			# 实例4 - 九九表
+			"""
+			1*1=1
+			2*1=2   2*2=4
+			3*1=3   3*2=6   3*3=9
+			4*1=4   4*2=8   4*3=12  4*4=16
+			5*1=5   5*2=10  5*3=15  5*4=20  5*5=25
+			6*1=6   ...
+			7*1=7   ...
+			8*1=8   ...
+			9*1=9   ...
+			"""
+			
+			row = 1
+			while row <= 9:
+			    col = 1
+			    while col <= row:
+			        if col == row:
+    
+      	        		  print("%d * %d = %d" % (col,row,(col * row)))
+			           <!-- 
+			            print("%d" % row, end="*")
+			            print("%d" % col, end="=")
+			            print("%d" % (row * col))
+			            -->
+			        else:
+			        	  
+			        	  print("%d * %d = %d" % (col, row, (col * row)),end="    ")
+			        	  
+			            <!--
+			            print("%d" % row , end="*")
+			            print("%d" % col , end="=")
+			            print("%d" % (row * col), end="  ")
+			            -->
+			        col += 1
+			    row +=1
+5.其他<br>
+多个字符串的输出
+
+	eg:
+		row = 1
+		col = 2
+		print("%d * %d" % (col, row))
+		print("%d * %d = %d" % (col, row, (col * row)),end="    ")
+转义字符 
+
+	\t  横向制表符 协助输出文本子啊垂直方向保持对齐
+		print("%d * %d = %d" % (col, row, (col * row)),end="\t")
+	\n  换行符 
+		print("hello \n Python")
+	\" 可以在控制台输出 “ 
+	\' 
+	\r 回车
 	
 参考资料:<br>
 1.[黑马视频]()<br>
+2.[W3C-Python](https://www.w3cschool.cn/python/)

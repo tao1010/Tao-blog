@@ -1,5 +1,5 @@
 ---
-title: Python-python基础-语法
+title: Python-python基础-语法和变量
 toc: true
 date: 2018-06-27 16:40:25
 tags: python基础
