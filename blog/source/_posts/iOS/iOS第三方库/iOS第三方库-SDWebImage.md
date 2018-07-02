@@ -102,6 +102,7 @@ Swift:
 	17SDWI 也提供了 UIButton+WebCache 和 MKAnnotationView+WebCache，方便使用；
 	18SDWebImagePrefetcher 可以预先下载图片，方便后续使用；
 
+
 四、SDWebImage图片格式		
 1.格式及代码		
 
