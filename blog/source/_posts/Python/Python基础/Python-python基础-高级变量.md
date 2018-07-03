@@ -131,11 +131,49 @@ categories: Python
 	改：xiaoming["age"] = 20	#key存在 修改
 	删：xiaoming.pop("gender") #删除 指定key 的键值对,若key错误或不存在，程序报错
 	
-	
-	
-四、字符串
+	合并字典:字典1.update(字典2)
+		被合并的字典包含已经存在的键值对，会覆盖原有的键值对
+		eg:
+			temp_dict = {"weight":75}
+			xiaoming.update(temp_dict)
+	清空字典:清空所有键值对
+		xiaoming.clear()
+4.循环遍历
 
+	#变量k是每一次循环中，获取到的键值对的key
+	for k in xiaoming:
+    	print("字典中的键值对为 key: %s, value:%s" % (k,xiaoming[k]))
+5.应用场景
 
+	使用对歌键值对 ，存储描述一个物体的相关信息 - 描述更复杂的数据信息；
+	将 多个字典 放在一个 列表 中，进行遍历，在循环体内部针对每个字典进行 相同的处理；
+四、字符串<br>
+1.字符串的定义
+	
+	可以一对 “”,也可用一对 ‘’,推荐 “ ”
+2.常用方法
+	
+	获取长度: len(字符串1)
+	统计小字符串2 在 大字符串2 中出现的次数: 字符串1.count(字符串2)
+	获取指定位置的字符: 字符串1[index]
+	获取指定字符在字符串的位置: 字符串1.index(字符串2)
+		若 字符串2 不存在 程序报错
+	循环遍历:
+		for char in 字符串1:
+			print(char)
+3.方法分类<br>
+![str-is](str-is.png)
+![str-find](str-find.png)
+
+	判断类型 - 9
+		str.isspace() #判断是否只包含空白或空格字符
+	查找和替换 - 7
+		str.startwith() #大小写有区别
+	大小写转换 - 5
+	文本对齐 - 3
+	去除空白字符 - 3
+	拆分和连接 - 5
+	
 五、公共方法
 
 
