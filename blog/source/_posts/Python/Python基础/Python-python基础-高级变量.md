@@ -162,18 +162,30 @@ categories: Python
 		for char in 字符串1:
 			print(char)
 3.方法分类<br>
-![str-is](str-is.png)
-![str-find](str-find.png)
+![判断类型](str-is.png)<br>
+![文本查找和替换](str-find.png)<br>
+![大小写转换](str-change.png)<br>
+![文本对齐](str-just.png)<br>
+![去除空白字符](str-strip.png)<br>
+![拆分连接](str-split.png)<br>
 
 	判断类型 - 9
-		str.isspace() #判断是否只包含空白或空格字符
 	查找和替换 - 7
-		str.startwith() #大小写有区别
 	大小写转换 - 5
 	文本对齐 - 3
 	去除空白字符 - 3
 	拆分和连接 - 5
+4.字符串切片
 	
+	切片：使用索引来限定范围，从一个大的字符串中切出小的 字符串
+	格式:
+		字符串[开始索引:结束索引:步长]
+	tips:
+		不包括结束索引之后的元素
+		顺序索引 0 1 2...
+		倒序索引(从右到左) 0 -1 -2 -3 ... 
+	eg: python = "python"
+		
 五、公共方法
 
 
