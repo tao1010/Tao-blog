@@ -181,17 +181,78 @@ categories: Python
 	格式:
 		字符串[开始索引:结束索引:步长]
 	tips:
-		不包括结束索引之后的元素
+		不包括结束索引的元素
 		顺序索引 0 1 2...
-		倒序索引(从右到左) 0 -1 -2 -3 ... 
-	eg: python = "python"
-		
-五、公共方法
+		倒序索引(从右到左) -1 -2 -3 ... 
+	eg: 
+		num = '0123456789'
+		print(num[2:6]) #2345
+		print(num[2:])  #23456789
+		print(num[:3])	#012
+		print(num[0:3])	#012
+		print(num[0::2]) #02468
+		print(num[2:-1]) #2345678
+		print(num[-1::-1]) #9876543210 倒序
+		print(num[::-1])	  #9876543210 倒序
+五、公共方法<br>
+1.定义
 
+	公共方法:列表、元祖、字典、字符串等共有的方法;
 
-六、高级变量
+2.Python常用函数
 
+	len(item) #元素个数
+	del(item)	#删除变量
+		a = [1,2,3,4]
+		del a[0]#删除列表中下标为0的元素
+		print(a)
+		del(a[0])#删除列表中下标为0的元素
+		print(a)
+		del(a) #删除a列表
+	max(item) #返回容器中元素的最大值 如果是字典，比较key,返回key
+	min(item)	#返回容器中元素的最小值 如果是字典，比较key,返回key
+		t_dic = {"a":"1","b":"2","c":"3"}
+		print(max(t_dic))
+		print(min(t_dic))
 
+	cmp(item1,item2) #Python3.x取消的此函数 比较大小 -1 < | 0 = | 1 >
+		Python3.x中可以用比较运算符比较
+3.切片
+	
+	使用对象：字符串、元祖、列表
+		"1234"[1:3] 		#字符串
+		[1,2,3,4][1:3]	#列表
+		(1,2,3,4)[1:3]	#元祖
+	字典不能切片 - 键值对形式存在，没有索引
+4.运算符<br>
+![commonmethod](commonmethod.png)
+
+	t_list = [1,2,3,4]
+	
+	# .extend 方法会将括号内的列表元素分别插入列表中
+	t_list.extend([8,9]) #[1,2,3,4,8,9]
+	
+	# .append方法会将括号内的对象作为一个元素插入
+	t_list.append([8,9]) #[1,2,3,4,[8,9]]
+	t_list.append(0)		 #[1,2,3,4,0]
+	
+	in 和 not in 在判断字典时，判断的是字典的key
+	成员运算符(in 和 not in) 用于测试序列中是否包含指定的成员 
+5.完整的for循环
+	
+	for 变量 in 集合:
+		...
+	else: #上面的for 循环集合中的每个元素都遍历了，就会执行else代码
+		没有通过break 退出循环，循环结束后，会执行的代码
+	
+	eg：
+		for num in [1,2,3,4]:
+		    print(num)
+		    if num == 2:
+		    	print("不执行else代码")
+		    	break;
+		else:
+		    print("循环结束!")
 参考资料:<br>
 1.[黑马视频]()<br>
 2.[W3C-Python](https://www.w3cschool.cn/python/)
