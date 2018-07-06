@@ -28,7 +28,7 @@ categories: iOS
 	iOS沙盒机制：
 		iOS应用程序只能在该程序创建的文件系统中读取文件，不可以去其它地方访问，此区域被成为沙盒，所以所有的非代码文件都要保存在此，例如图像，图标，声音，映像，属性列表，文本文件等;
 	沙盒：默认情况下，每个沙盒含有3个文件夹：Documents, Library 和 tmp;
-		 Documents：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录;
+		Documents：苹果建议将程序中建立的或在程序中浏览到的文件数据保存在该目录下，iTunes备份和恢复的时候会包括此目录;
         Library：存储程序的默认设置或其它状态信息；
         		Library/Caches：存放缓存文件，iTunes不会备份此目录，此目录下文件不会在应用退出删除.
        		Library/preferences: 存放的是 user default 存储的信息，iTunes会备份此目录， 应用程序重新启动不会丢弃数据，我们使用 NSUserDefaults写的设置数据都会保存到该目录下的一个plist文件中，这就是所谓的写到plist中！
@@ -78,7 +78,7 @@ Swift:
 	...
 	...	
 3.下载流程:		
-![sdw4](sdw4.png)		
+![SDW](SDW.png)		
 
 	1.入口：setImageWithURL:placeholderImage:options:会先把 placeholderImage 显示，然后 SDWebImageManager 根据 URL 开始处理图片;
 	2.进入：SDWebImageManagerdownloadWithURL:delegate:options:userInfo:，交给 SDImageCache 从缓存查找图片是否已经下载queryDiskCacheForKey:delegate:userInfo:  ；
@@ -95,7 +95,7 @@ Swift:
     11图片解码处理在一个NSOperationQueue完成，不会拖慢主线程 UI。如果有需要对下载的图片进行二次处理，最好也在这里完成，效率会好很多。
 	12在主线程 notifyDelegateOnMainThreadWithInfo: 宣告解码完成，		imageDecoder:didFinishDecodingImage:userInfo:回调给 SDWebImageDownloader;
 		imageDownloader:didFinishWithImage:回调给 SDWebImageManager 告知图片下载完成;
-	 13通知所有的 downloadDelegates下载完成，回调给需要的地方展示图片;
+	13通知所有的 downloadDelegates下载完成，回调给需要的地方展示图片;
 	14将图片保存到 SDImageCache 中，内存缓存和硬盘缓存同时保存;
 	15写文件到硬盘也在以单独 NSInvocationOperation 完成，避免拖慢主线程;
 	16SDImageCache 在初始化的时候会注册一些消息通知，在内存警告或退到后台的时候清理内存图片缓存，应用结束的时候清理过期图片。
@@ -289,13 +289,9 @@ eg:UIViewAnimationOptions
 		其实给一个枚举变量赋予多个枚举值的时候，原理只是把各个枚举值加起来罢了。当加起来以后，就获取了一个新的值，那么为了保证这个值的唯一性，这个时候就体现了位运算的重要作用。位运算可以确保枚举值组合的唯一性。其实|这个按位或的符号就是将多个枚举值加起来的意思。
 	  ● 两个不同的枚举值按位与&其实就是0，相同的按位&就是其本身;
 	  ● 两个不同的枚举值按位或|其实就是两个枚举值的相加，相同的按位或|就是其本身;
-	
-	
-	
 参考资料：		
-1.[内存缓存和磁盘缓存区别](https://www.jianshu.com/p/3b0e290cc049)       
-2.[内存缓存和磁盘缓存](https://blog.csdn.net/u010958446/article/details/57409138)       
-3.[SDWebImage](https://cocoapods.org/?q=sdwebimage)      
-4.[SDWebImage — 图片类型判断深入研究](https://www.jianshu.com/p/189f186f767f)      
-5.[位移枚举](https://www.jianshu.com/p/3a046ae71b59)       
-		
+1.[内存缓存和磁盘缓存区别](https://www.jianshu.com/p/3b0e290cc049)    
+2.[内存缓存和磁盘缓存](https://blog.csdn.net/u010958446/article/details/57409138)     
+3.[SDWebImage](https://cocoapods.org/?q=sdwebimage)    
+4.[SDWebImage — 图片类型判断深入研究](https://www.jianshu.com/p/189f186f767f)    
+5.[位移枚举](https://www.jianshu.com/p/3a046ae71b59)
