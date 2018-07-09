@@ -169,9 +169,58 @@ categories: Python
 				pass
 		get_info("小明",title="hello",gender=False)
 7.多值参数
+	
+	使用场景：
+		需要 一个函数 能够处理的参数 个数 是不确定的，需要使用多值参数
+	定义方式：
+		参数名前 增加一个 * 可以接收 元祖
+		参数名前 增加两个 ** 可以接收 字典
+	一般多值参数的命名方式 习惯使用2个名字：
+		*args     存放 元祖 参数 前面放一个 * #args--arguments
+		**kwargs	存放 字典 参数 前面有两个 * #kwargs --keyword arguments
+	eg:
+		
+		def demo(num, *args, **kwargs):
+		    print(num)
+		    print(args)
+		    print(kwargs)
+		
+		demo(1,2,3,4,5,name="小明",age=18,gender=True)
+		输出:
+			1
+			(2,3,4,5)
+			{'name': '小明', 'age': 18, 'gender': True}
+元祖和字典的拆包
 
+	拆包 使用场景
+		将一个 元祖变量 传递给 args
+		将一个 字典变量 传递给 kwargs
+	拆包 使用方式：
+		在 元祖变量 前 增加一个 *
+		在 字典变量 前 增加两个 **
+	eg:
+		def demo(*args, **kwargs):
+			    print(args)
+			    print(kwargs)
+		
+		gl_nums = (1,2,3)
+		gl_dic = {'name': '小明', 'age': 18, 'gender': True}
+		demo(*gl_nums,**gl_dic)
 8.递归	
-
-参考资料:<br>
-1.[黑马视频]()<br>
+	
+	定义：
+		一个函数内部自己调用自己
+	特点：
+		函数内部代码 相同，针对参数不同，处理结果不同；
+		递归出口:当参数满足一个条件时，函数不再执行(否则出现死循环)
+	
+	eg:
+		def test_demo(num):
+		    if num == 1:
+		        return 1
+		    temp = test_demo(num - 1)
+		    return num + temp
+		print("%s" % test_demo(10))
+参考资料:      
+1.[黑马视频]()     
 2.[W3C-Python](https://www.w3cschool.cn/python/)
