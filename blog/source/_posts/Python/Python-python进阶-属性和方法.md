@@ -60,6 +60,8 @@ xiaomei.secret2()#不能访问私有方法
 	语法：
 		class 类名(父类名)	:
 			pass
+2.eg:
+
 ```python
 class Animal:
     def eat(self):
@@ -86,6 +88,9 @@ dog.dark()
 cat = Cat()
 cat.catch()
 cat.sleep()
+#解析：
+	Dog类是Animal类的子类，Animal类是Dog类的父类，Dog类是从 Animal类继承
+	Dog类是Animal类的派生类，Animal类是Dog类的基类，Dog类是从 Animal类派生
 ```
 	
 
