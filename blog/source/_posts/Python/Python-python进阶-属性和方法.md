@@ -57,6 +57,7 @@ xiaomei.secret2()#不能访问私有方法
 
 	子类拥有父类的所有方法和属性
 	可重写父类方法
+	传递性(子类可继承父类，可继承父类的父类)
 	语法：
 		class 类名(父类名)	:
 			pass
@@ -70,11 +71,15 @@ class Animal:
         print("喝...")
     def sleep(self):
         print("睡...")
+        
+class XiaoTianQuan(Dog):
+	def fly(self):
+		print("啸天犬可以飞...")
 
 class Dog(Animal):
-
     def dark(self):
         print("汪汪汪...")
+        
 class Cat(Animal):
     def catch(self):
         print("抓老鼠...")
