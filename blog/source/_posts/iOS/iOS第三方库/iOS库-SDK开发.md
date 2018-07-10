@@ -1,6 +1,6 @@
 ---
-title: iOS第三方库-SDK开发
-date: 2018-05-17 22:44:08
+title: iOS库-SDK开发
+date: 2017-07-19 22:44:08
 tags: iOS第三方库
 categories: iOS
 ---
@@ -74,6 +74,6 @@ categories: iOS
 
 
 参考资料:		
-1.[SDK开发规则](https://www.jianshu.com/p/dd8d1b7ce1e4)
+1.[SDK开发规则](https://www.jianshu.com/p/dd8d1b7ce1e4)     
 1.[SDK开发](https://www.jianshu.com/p/c131baae4307)    
-2.[创建SDK](https://www.jianshu.com/p/65b1c1326c50)
+2.[创建SDK](https://www.jianshu.com/p/65b1c1326c50)      
