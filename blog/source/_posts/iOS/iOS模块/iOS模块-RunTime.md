@@ -383,3 +383,4 @@ NSObject+XT.m
 ```
 参考资料:     
 1.[OC中的RunTime运用](https://www.jianshu.com/p/ab966e8a82e2)     
+2.[消息机制](https://blog.csdn.net/li15809284891/article/details/54767504)    
