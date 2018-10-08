@@ -145,6 +145,15 @@ CocoaPods是ruby写的，用于管理Xcode开发时第三方开源的工具。
 		执行命令 sudo gem install cocoapods 报错  
 	处理:
 		sudo gem install -n /usr/local/bin cocoapods
+2.[!] Oh no, an error occurred.
+Search for existing github issues similar to yours:
+...
+	
+	解决方案:
+	sudo rm -rf ~/.cocoapods/repos/master
+	pod setup		
+		
+
 参考资料:<br>
 1.[Podfile配置](https://www.jianshu.com/p/8a0fd6150159)<br>
 2.[pod install 和 pod update区别](https://blog.csdn.net/cwf19860527/article/details/54139214)
